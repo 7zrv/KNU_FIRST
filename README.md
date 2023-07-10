@@ -20,4 +20,5 @@
 
 1. Java 11을 설치합니다.
 2. src/main/frontend 디렉토리로 이동합니다.
-3. npm start 
+3. npm install
+4. npm start 
