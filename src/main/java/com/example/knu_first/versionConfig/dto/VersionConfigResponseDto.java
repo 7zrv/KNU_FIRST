@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Getter
 public class VersionConfigResponseDto {
 
-
     private final Long idx;
     private final String os;
     private final String ver;
@@ -18,8 +17,6 @@ public class VersionConfigResponseDto {
     private final String message;
     private final String packagePath;
     private final LocalDateTime regdate;
-
-
 
     public VersionConfigResponseDto(VersionConfig versionConfig){
         this.idx = versionConfig.getIdx();

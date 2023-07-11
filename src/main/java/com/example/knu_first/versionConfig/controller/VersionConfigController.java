@@ -31,7 +31,7 @@ public class VersionConfigController {
     }
 
     @GetMapping("/api/vercontrol/getConfig")
-    public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody String os){
+    public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestParam String os){
         return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(os)));
     }
 

@@ -23,7 +23,7 @@ public class VersionConfigService {
     }
 
     public VersionConfig findVersionConfigByOs(String os){
-        return versionConfigRepository.findByOs(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
+        return versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
     }
 
     public String makeDumData(){
