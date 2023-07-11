@@ -21,13 +21,13 @@ public class VersionConfigService {
         return versionConfigRepository.findAll();
     }
 
-    public VersionConfig findByVersionConfig(String os){
+    public VersionConfig findVersionConfigByOs(String os){
         return versionConfigRepository.findByOs(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
     }
 
     public String makeDumData(){
         VersionConfig versionConfig1 = VersionConfig.builder()
-                .osName("Windows")
+                .osName("ios")
                 .version("1.0")
                 .updatetype(true)
                 .msg("This is an update message")

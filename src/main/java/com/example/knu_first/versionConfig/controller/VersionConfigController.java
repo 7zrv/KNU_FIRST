@@ -33,11 +33,7 @@ public class VersionConfigController {
 
     @GetMapping("/api/vercontrol/getConfig")
     public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody String os){
-
-        VersionConfigResponseDto recentVersion = versionConfigService.findByVersionConfig(os);
-
-
-        return ResponseEntity.ok().body(recentVersion);
+        return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(os)));
     }
 
     @GetMapping("/api/makeDummyData")
