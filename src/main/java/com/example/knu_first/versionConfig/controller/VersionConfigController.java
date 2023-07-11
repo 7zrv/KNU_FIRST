@@ -1,6 +1,7 @@
 package com.example.knu_first.versionConfig.controller;
 
 
+import com.example.knu_first.versionConfig.dto.OsRequestDto;
 import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,9 @@ public class VersionConfigController {
         return ResponseEntity.ok().body(versionConfigs);
     }
 
-    @GetMapping("/api/vercontrol/getConfig")
-    public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestParam("os") String os){
-        return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(os)));
+    @PostMapping("/api/vercontrol/getConfig")
+    public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody OsRequestDto osRequestDto) throws Exception {
+        return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto.getOs())));
     }
 
     @GetMapping("/api/makeDummyData")

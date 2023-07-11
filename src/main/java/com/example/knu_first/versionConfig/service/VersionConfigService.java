@@ -22,7 +22,7 @@ public class VersionConfigService {
         return versionConfigRepository.findAll();
     }
 
-    public VersionConfig findVersionConfigByOs(String os) {
+    public VersionConfig findVersionConfigByOs(String os) throws Exception{
         return versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElse(null);
     }
 
