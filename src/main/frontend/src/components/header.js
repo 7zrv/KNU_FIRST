@@ -1,11 +1,16 @@
+import { Component, useState } from "react";
 import "./header.css";
+import Modal from "./modal";
 
-export default function Header() {
+export default function Header(props) {
+  const [openTest, setOpenTest] = useState(false);
+  const { versionList } = props;
   const onClickAdd = function () {
     console.log("Add Clicked");
   };
   const onClickTest = function () {
     console.log("Test Clicked");
+    setOpenTest(!openTest);
   };
 
   return (
@@ -16,6 +21,9 @@ export default function Header() {
       <button className="testBtn" onClick={onClickTest}>
         APP TEST
       </button>
+      {openTest ? (
+        <Modal versionList={versionList} setOpenTest={setOpenTest} />
+      ) : null}
     </section>
   );
 }

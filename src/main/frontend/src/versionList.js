@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./VersionList.css";
+import Header from "./components/header";
+
 const VersionList = () => {
   const tempData = (
     <section className="record">
@@ -24,7 +26,7 @@ const VersionList = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
-      .get("/api/vercontrol/getConfigAll")
+      .get("localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
       })
@@ -51,23 +53,26 @@ const VersionList = () => {
     );
   });
   return (
-    <section>
-      <table>
-        <thead className="tableContainer">
-          <tr className="tableHeader">
-            <th>idx</th>
-            <th>os</th>
-            <th>ver</th>
-            <th>updatetype</th>
-            <th>message</th>
-            <th>pacakge</th>
-            <th>regdate</th>
-            <th>action</th>
-          </tr>
-          {tempData}
-        </thead>
-      </table>
-    </section>
+    <>
+      <Header versionList={list} />
+      <section>
+        <table>
+          <thead className="tableContainer">
+            <tr className="tableHeader">
+              <th>idx</th>
+              <th>os</th>
+              <th>ver</th>
+              <th>updatetype</th>
+              <th>message</th>
+              <th>pacakge</th>
+              <th>regdate</th>
+              <th>action</th>
+            </tr>
+            {tableList}
+          </thead>
+        </table>
+      </section>
+    </>
   );
 };
 
