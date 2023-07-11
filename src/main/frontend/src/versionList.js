@@ -4,9 +4,14 @@ import axios from "axios";
 const VersionList = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
-    axios.get("/api/vercontrol/getConfigAll").then((res) => {
-      setList(res.data);
-    });
+    axios
+      .get("/api/vercontrol/getConfigAll")
+      .then((res) => {
+        setList(res.data);
+      })
+      .catch((err) => {
+        return err;
+      });
   });
   const tableList = list.map((item) => {
     return (
