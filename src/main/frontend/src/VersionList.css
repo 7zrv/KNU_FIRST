@@ -1,55 +1,45 @@
-table {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.tableContainer {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.table {
+  margin-top: 15px;
   border: 2px solid black;
-  padding-inline: 50px;
+  width: 100%;
+  padding: 15px;
 }
 
-.tableHeader {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.tableHeader > th {
+  text-align: start;
+  font-weight: bolder;
+  font-size: 20px;
+  height: 30px;
+  background-color: grey;
+  color: white;
+  border: 2px solid black;
+  padding: 5px 10px 5px 10px;
 }
 
-th {
-  width: 100%;
-  display: flex;
-  height: 100%;
+.record > td {
   font-size: 20px;
   font-weight: bold;
-  align-items: center;
+  border: 2px solid black;
+  padding: 5px 10px 5px 10px;
 }
 
-.record {
-  width: 100%;
-  background-color: bisque;
+.record .buttons {
+  width: 210px;
 }
 
-tr {
-  display: flex;
-  justify-content: space-between;
+.record .buttons > button {
+  width: 70px;
+  height: 50px;
+  font-size: larger;
+  font-weight: bolder;
 }
 
-td {
-  display: flex;
-  height: 40px;
-  width: 100%;
-  font-size: 25px;
-  align-items: center;
+.testBtn {
+  background: yellow;
 }
-
-td > button {
-  height: 100%;
-  width: 34%;
+.modBtn {
+  background: green;
+}
+.deleteBtn {
+  background: red;
 }
