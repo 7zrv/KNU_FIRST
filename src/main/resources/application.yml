@@ -5,7 +5,7 @@ spring:
     username: root
 
     #insert password
-    password:
+    password: 12345678
 
 
   jpa:
