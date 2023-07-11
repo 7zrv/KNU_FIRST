@@ -33,7 +33,6 @@ th {
 
 .record {
   width: 100%;
-  background-color: bisque;
 }
 
 tr {
@@ -52,4 +51,16 @@ td {
 td > button {
   height: 100%;
   width: 34%;
+}
+
+td > .testBtn {
+  background-color: yellow;
+}
+
+td > .modBtn {
+  background-color: green;
+}
+
+td > .delBtn {
+  background-color: red;
 }
