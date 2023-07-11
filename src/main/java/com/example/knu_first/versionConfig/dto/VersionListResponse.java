@@ -1,4 +1,4 @@
-package com.example.knu_first.web.dto;
+package com.example.knu_first.versionConfig.dto;
 
 
 import com.example.knu_first.versionConfig.entity.VersionConfig;
