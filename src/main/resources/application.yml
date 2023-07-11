@@ -4,8 +4,7 @@ spring:
     url: jdbc:mariadb://careerup.c2pjf92fzjv5.ap-northeast-2.rds.amazonaws.com:3306/mydb
     username: root
     #insert password
-    password: 12345678
-
+    password:
   jpa:
     properties:
       hibernate:
