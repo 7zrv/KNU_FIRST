@@ -23,6 +23,11 @@ const VersionList = () => {
         <td>{item.message}</td>
         <td>{item.pacakge}</td>
         <td>{item.regdate}</td>
+        <td>
+          <button>Test</button>
+          <button>수정</button>
+          <button>삭제</button>
+        </td>
       </tr>
     );
   });
@@ -38,6 +43,7 @@ const VersionList = () => {
             <th>message</th>
             <th>pacakge</th>
             <th>regdate</th>
+            <th>action</th>
           </tr>
           {tableList}
         </thead>
