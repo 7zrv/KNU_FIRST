@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./versionList.css";
+import "./VersionList.css";
 const VersionList = () => {
   const tempData = (
     <section className="record">
@@ -20,6 +20,9 @@ const VersionList = () => {
       </tr>
     </section>
   );
+
+
+const VersionList = () => {
 
   const [list, setList] = useState([]);
   useEffect(() => {
@@ -55,6 +58,7 @@ const VersionList = () => {
       <table>
         <thead className="tableContainer">
           <tr className="tableHeader">
+
             <th>idx</th>
             <th>os</th>
             <th>ver</th>
@@ -64,6 +68,7 @@ const VersionList = () => {
             <th>regdate</th>
             <th>action</th>
           </tr>
+
           {tempData}
         </thead>
       </table>

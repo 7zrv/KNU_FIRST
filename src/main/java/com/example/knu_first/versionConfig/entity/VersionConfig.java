@@ -29,16 +29,26 @@ public class VersionConfig {
     @Column(name = "updatetype")
     private boolean updatetype;
 
-    @Column(name = "message")
-    private String message;
 
     @Column(name = "regdate")
     private LocalDateTime regdate;
+
+    @Column(name = "msg")
+    private String message;
+
+    @Column(name = "package")
+    private String packagePath;
+
+
+
     @Builder
-    public VersionConfig(String osName, String version, boolean updatetype, LocalDateTime regdate) {
+    public VersionConfig(String osName, String version, boolean updatetype, String msg, String packagePath,LocalDateTime regdate) {
         this.osName = osName;
         this.version = version;
         this.updatetype = updatetype;
+        this.message = msg;
+        this.packagePath = packagePath;
+
         this.regdate = regdate;
     }
 }
