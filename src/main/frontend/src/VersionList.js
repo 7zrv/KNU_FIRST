@@ -25,12 +25,15 @@ const VersionList = () => {
 
   const [list, setList] = useState([]);
   useEffect(() => {
+      console.log("dd");
     axios
-      .get("localhost:8080/api/vercontrol/getConfigAll")
+      .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
+
       })
       .catch((err) => {
+          console.log(err)
         return err;
       });
   });
@@ -42,7 +45,7 @@ const VersionList = () => {
         <td>{item.ver}</td>
         <td>{item.updatetype}</td>
         <td>{item.message}</td>
-        <td>{item.pacakge}</td>
+        <td>{item.packagePath}</td>
         <td>{item.regdate}</td>
         <td>
           <button>Test</button>
