@@ -6,6 +6,7 @@ import com.example.knu_first.versionConfig.repository.VersionConfigRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class VersionConfigService {
 
     public List<VersionConfig> findAllVersionConfig(){
         return versionConfigRepository.findAll();
+    }
+
+    public VersionConfig findByVersionConfig(String os){
+        return versionConfigRepository.findByOs(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
     }
 
     public String makeDumData(){
