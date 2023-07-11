@@ -7,5 +7,18 @@
 button {
   margin-top: 20px;
   width: 48%;
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
   padding: 10px;
+  border-radius: 15px;
+}
+
+.addBtn {
+  background-color: dodgerblue;
+}
+
+.testBtn {
+  background-color: darkcyan;
 }
