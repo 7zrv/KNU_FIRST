@@ -4,7 +4,8 @@
   justify-content: space-around;
   align-items: center;
 }
-button {
+.headerBar .addBtn,
+.headerBar .testBtn {
   margin-top: 20px;
   width: 48%;
   height: 60px;
@@ -15,10 +16,10 @@ button {
   border-radius: 15px;
 }
 
-.addBtn {
+.headerBar .addBtn {
   background-color: dodgerblue;
 }
 
-.testBtn {
+.headerBar .testBtn {
   background-color: darkcyan;
 }

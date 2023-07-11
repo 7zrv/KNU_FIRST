@@ -1,5 +1,6 @@
 package com.example.knu_first.versionConfig.controller;
 
+
 import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;

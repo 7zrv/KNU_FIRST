@@ -1,7 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./VersionList.css";
+const VersionList = () => {
+  const tempData = (
+    <section className="record">
+      <tr key="1">
+        <td>1</td>
+        <td>iOS</td>
+        <td>1.0</td>
+        <td>true</td>
+        <td>null</td>
+        <td>com.test.myApp</td>
+        <td>2023-01-01</td>
+        <td>
+          <button className="testBtn">Test</button>
+          <button className="modBtn">수정</button>
+          <button className="delBtn">삭제</button>
+        </td>
+      </tr>
+    </section>
+  );
+
 
 const VersionList = () => {
+
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
@@ -32,10 +54,11 @@ const VersionList = () => {
     );
   });
   return (
-    <>
+    <section>
       <table>
-        <thead>
-          <tr>
+        <thead className="tableContainer">
+          <tr className="tableHeader">
+
             <th>idx</th>
             <th>os</th>
             <th>ver</th>
@@ -45,10 +68,11 @@ const VersionList = () => {
             <th>regdate</th>
             <th>action</th>
           </tr>
-          {tableList}
+
+          {tempData}
         </thead>
       </table>
-    </>
+    </section>
   );
 };
 
