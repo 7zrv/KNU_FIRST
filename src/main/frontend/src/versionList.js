@@ -21,9 +21,6 @@ const VersionList = () => {
     </section>
   );
 
-
-const VersionList = () => {
-
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
@@ -58,7 +55,6 @@ const VersionList = () => {
       <table>
         <thead className="tableContainer">
           <tr className="tableHeader">
-
             <th>idx</th>
             <th>os</th>
             <th>ver</th>
@@ -68,7 +64,6 @@ const VersionList = () => {
             <th>regdate</th>
             <th>action</th>
           </tr>
-
           {tempData}
         </thead>
       </table>
