@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class VersionListResponse {
-    private final int idx;
+    private final Long idx;
     private final String os;
     private final String ver;
     private final boolean updatetype;
@@ -16,11 +16,11 @@ public class VersionListResponse {
     private final LocalDateTime regdate;
 
     public VersionListResponse(VersionConfig versionConfig) {
-        this.idx = versionConfig.
-        this.os = os;
-        this.ver = ver;
-        this.updatetype = updatetype;
-        this.message = message;
-        this.regdate = regdate;
+        this.idx = versionConfig.getId();
+        this.os = versionConfig.getOsName();
+        this.ver = versionConfig.getVersion();
+        this.updatetype = versionConfig.isUpdatetype();
+        this.message = versionConfig.getMessage();
+        this.regdate = versionConfig.getRegdate();
     }
 }

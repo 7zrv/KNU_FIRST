@@ -29,6 +29,9 @@ public class VersionConfig {
     @Column(name = "updatetype")
     private boolean updatetype;
 
+    @Column(name = "message")
+    private String message;
+
     @Column(name = "regdate")
     private LocalDateTime regdate;
     @Builder
