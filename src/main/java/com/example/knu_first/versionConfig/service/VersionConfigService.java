@@ -17,6 +17,10 @@ public class VersionConfigService {
 
     private final VersionConfigRepository versionConfigRepository;
 
+    public VersionConfig saveVersionConfig(VersionConfigRequestDto versionConfigRequestDto){
+        return versionConfigRepository.save(versionConfigRequestDto);
+    }
+
     public List<VersionConfig> findAllVersionConfig(){
         return versionConfigRepository.findAll();
     }

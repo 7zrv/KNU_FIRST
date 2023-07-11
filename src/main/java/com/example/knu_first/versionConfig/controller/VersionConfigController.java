@@ -5,10 +5,7 @@ import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +16,13 @@ import java.util.stream.Collectors;
 public class VersionConfigController {
 
     private final VersionConfigService versionConfigService;
+
+    @PostMapping("/api/vercontrol/addVersionConfig")
+    public String addVersionConfig(@RequestBody VersionConfigRequestDto versionConfigRequestDto){
+        versionConfigService.saveVersionConfig(versionConfigRequestDto);
+
+        return ;
+    }
 
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){
