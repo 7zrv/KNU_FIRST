@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,6 +29,15 @@ public class VersionConfigController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(versionConfigs);
+    }
+
+    @GetMapping("/api/vercontrol/getConfig")
+    public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody String os){
+
+        VersionConfigResponseDto recentVersion = versionConfigService.findByVersionConfig(os);
+
+
+        return ResponseEntity.ok().body(recentVersion);
     }
 
     @GetMapping("/api/makeDummyData")
