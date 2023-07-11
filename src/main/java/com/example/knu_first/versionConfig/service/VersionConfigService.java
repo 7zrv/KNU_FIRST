@@ -22,14 +22,15 @@ public class VersionConfigService {
         return versionConfigRepository.findAll();
     }
 
-    public VersionConfig findVersionConfigByOs(String os){
-        return versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
+    public VersionConfig findVersionConfigByOs(String os) {
+        return versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElse(null);
     }
+
 
     public String makeDumData(){
         VersionConfig versionConfig1 = VersionConfig.builder()
                 .os("ios")
-                .version("1.0")
+                .version("2.0")
                 .updatetype(true)
                 .message("This is an update message")
                 .packagePath("/path/to/package1")
@@ -38,7 +39,7 @@ public class VersionConfigService {
 
         VersionConfig versionConfig2 = VersionConfig.builder()
                 .os("Android")
-                .version("2.0")
+                .version("3.0")
                 .updatetype(false)
                 .message("This is another update message")
                 .packagePath("/path/to/package2")
