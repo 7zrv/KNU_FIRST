@@ -1,0 +1,11 @@
+.headerBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+button {
+  margin-top: 20px;
+  width: 48%;
+  padding: 10px;
+}
