@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "version_config")
 public class VersionConfig {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idx", nullable = false)
@@ -31,11 +30,23 @@ public class VersionConfig {
 
     @Column(name = "regdate")
     private LocalDateTime regdate;
+
+    @Column(name = "msg")
+    private String message;
+
+    @Column(name = "package")
+    private String packagePath;
+
+
+
     @Builder
-    public VersionConfig(String osName, String version, boolean updatetype, LocalDateTime regdate) {
+    public VersionConfig(String osName, String version, boolean updatetype, String msg, String packagePath,LocalDateTime regdate) {
         this.osName = osName;
         this.version = version;
         this.updatetype = updatetype;
+        this.message = msg;
+        this.packagePath = packagePath;
         this.regdate = regdate;
+
     }
 }

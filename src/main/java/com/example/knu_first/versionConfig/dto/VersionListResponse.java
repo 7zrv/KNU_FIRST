@@ -20,7 +20,6 @@ public class VersionListResponse {
         this.os = versionConfig.getOsName();
         this.ver = versionConfig.getVersion();
         this.updatetype = versionConfig.isUpdatetype();
-        this.message = versionConfig.getMessage();
         this.regdate = versionConfig.getRegdate();
     }
 }
