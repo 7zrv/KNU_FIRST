@@ -12,7 +12,7 @@ public class VersionConfigResponseDto {
 
 
     private final Long idx;
-    private final String osName;
+    private final String os;
     private final String ver;
     private final Boolean updatetype;
     private final String message;
@@ -22,8 +22,8 @@ public class VersionConfigResponseDto {
 
 
     public VersionConfigResponseDto(VersionConfig versionConfig){
-        this.idx = versionConfig.getId();
-        this.osName = versionConfig.getOsName();
+        this.idx = versionConfig.getIdx();
+        this.os = versionConfig.getOs();
         this.ver = versionConfig.getVersion();
         this.updatetype = versionConfig.isUpdatetype();
         this.message = versionConfig.getMessage();

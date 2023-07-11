@@ -16,8 +16,8 @@ public class VersionListResponse {
     private final LocalDateTime regdate;
 
     public VersionListResponse(VersionConfig versionConfig) {
-        this.idx = versionConfig.getId();
-        this.os = versionConfig.getOsName();
+        this.idx = versionConfig.getIdx();
+        this.os = versionConfig.getOs();
         this.ver = versionConfig.getVersion();
         this.updatetype = versionConfig.isUpdatetype();
         this.message = versionConfig.getMessage();

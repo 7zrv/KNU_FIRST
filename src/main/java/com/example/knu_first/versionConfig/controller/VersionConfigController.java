@@ -17,12 +17,7 @@ public class VersionConfigController {
 
     private final VersionConfigService versionConfigService;
 
-    @PostMapping("/api/vercontrol/addVersionConfig")
-    public String addVersionConfig(@RequestBody VersionConfigRequestDto versionConfigRequestDto){
-        versionConfigService.saveVersionConfig(versionConfigRequestDto);
 
-        return ;
-    }
 
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){

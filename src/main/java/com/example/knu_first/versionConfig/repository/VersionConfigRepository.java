@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface VersionConfigRepository extends JpaRepository<VersionConfig, Long> {
-    Optional<VersionConfig> findByOsName(String os);
+    Optional<VersionConfig> findByOs(String os);
 
 }

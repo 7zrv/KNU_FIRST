@@ -17,33 +17,30 @@ public class VersionConfigService {
 
     private final VersionConfigRepository versionConfigRepository;
 
-    public VersionConfig saveVersionConfig(VersionConfigRequestDto versionConfigRequestDto){
-        return versionConfigRepository.save(versionConfigRequestDto);
-    }
 
     public List<VersionConfig> findAllVersionConfig(){
         return versionConfigRepository.findAll();
     }
 
     public VersionConfig findVersionConfigByOs(String os){
-        return versionConfigRepository.findByOsName(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
+        return versionConfigRepository.findByOs(os).orElseThrow(() -> new IllegalArgumentException("not found : "+ os));
     }
 
     public String makeDumData(){
         VersionConfig versionConfig1 = VersionConfig.builder()
-                .osName("ios")
+                .os("ios")
                 .version("1.0")
                 .updatetype(true)
-                .msg("This is an update message")
+                .message("This is an update message")
                 .packagePath("/path/to/package1")
                 .regdate(LocalDateTime.now())
                 .build();
 
         VersionConfig versionConfig2 = VersionConfig.builder()
-                .osName("Android")
+                .os("Android")
                 .version("2.0")
                 .updatetype(false)
-                .msg("This is another update message")
+                .message("This is another update message")
                 .packagePath("/path/to/package2")
                 .regdate(LocalDateTime.now())
                 .build();

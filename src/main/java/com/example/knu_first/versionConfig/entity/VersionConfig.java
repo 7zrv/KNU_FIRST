@@ -18,10 +18,10 @@ public class VersionConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idx", nullable = false)
-    private Long id;
+    private Long idx;
 
     @Column(name = "os", nullable = false)
-    private String osName;
+    private String os;
 
     @Column(name = "ver")
     private String version;
@@ -33,7 +33,7 @@ public class VersionConfig {
     @Column(name = "regdate")
     private LocalDateTime regdate;
 
-    @Column(name = "msg")
+    @Column(name = "message")
     private String message;
 
     @Column(name = "package")
@@ -42,13 +42,12 @@ public class VersionConfig {
 
 
     @Builder
-    public VersionConfig(String osName, String version, boolean updatetype, String msg, String packagePath,LocalDateTime regdate) {
-        this.osName = osName;
+    public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath,LocalDateTime regdate) {
+        this.os = os;
         this.version = version;
         this.updatetype = updatetype;
-        this.message = msg;
+        this.message = message;
         this.packagePath = packagePath;
-
         this.regdate = regdate;
     }
 }
