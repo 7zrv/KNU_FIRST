@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Getter
 public class VersionConfigResponseDto {
-
     private final Long idx;
     private final String os;
     private final String ver;
