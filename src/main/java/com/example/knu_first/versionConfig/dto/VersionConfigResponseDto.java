@@ -26,6 +26,8 @@ public class VersionConfigResponseDto {
         this.osName = versionConfig.getOsName();
         this.ver = versionConfig.getVersion();
         this.updatetype = versionConfig.isUpdatetype();
+        this.message = versionConfig.getMessage();
+        this.packagePath = versionConfig.getPackagePath();
         this.regdate = versionConfig.getRegdate();
     }
 

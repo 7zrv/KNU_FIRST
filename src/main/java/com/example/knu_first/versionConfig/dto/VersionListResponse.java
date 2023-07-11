@@ -1,4 +1,4 @@
-package com.example.knu_first.versionConfig.dto;
+/*package com.example.knu_first.versionConfig.dto;
 
 
 import com.example.knu_first.versionConfig.entity.VersionConfig;
@@ -23,3 +23,5 @@ public class VersionListResponse {
         this.regdate = versionConfig.getRegdate();
     }
 }
+*/
+

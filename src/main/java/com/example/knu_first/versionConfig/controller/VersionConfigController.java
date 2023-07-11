@@ -6,6 +6,7 @@ import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,6 +20,11 @@ public class VersionConfigController {
     private final VersionConfigService versionConfigService;
 
 
+    @PutMapping("/api/new/dummy/data")
+    public String makeDumData(){
+        return versionConfigService.makeDumData();
+    }
+
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){
 
@@ -28,6 +34,5 @@ public class VersionConfigController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(versionConfigs);
-
     }
 }
