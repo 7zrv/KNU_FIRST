@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class VersionConfigService {
 
-    private VersionConfigRepository versionConfigRepository;
+    private final VersionConfigRepository versionConfigRepository;
 
     public List<VersionConfig> findAllVersionConfig(){
         return versionConfigRepository.findAll();
@@ -44,7 +44,10 @@ public class VersionConfigService {
         versionConfigRepository.save(versionConfig2);
 
         System.out.println("Dummy data loaded successfully.");
+
         return "success";
     }
+
+
 
 }

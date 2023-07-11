@@ -47,6 +47,5 @@ public class VersionConfig {
         this.message = msg;
         this.packagePath = packagePath;
         this.regdate = regdate;
-
     }
 }

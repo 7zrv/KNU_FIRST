@@ -19,12 +19,6 @@ public class VersionConfigController {
 
     private final VersionConfigService versionConfigService;
 
-
-    @PutMapping("/api/new/dummy/data")
-    public String makeDumData(){
-        return versionConfigService.makeDumData();
-    }
-
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){
 
@@ -34,5 +28,10 @@ public class VersionConfigController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().body(versionConfigs);
+    }
+
+    @GetMapping("/api/makeDummyData")
+    public String makeDummyData(){
+        return versionConfigService.makeDumData();
     }
 }
