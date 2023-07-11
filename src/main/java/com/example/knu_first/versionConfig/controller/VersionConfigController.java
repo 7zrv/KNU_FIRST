@@ -1,5 +1,6 @@
 package com.example.knu_first.versionConfig.controller;
 
+
 import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
