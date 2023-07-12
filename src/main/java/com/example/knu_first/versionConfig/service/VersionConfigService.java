@@ -1,11 +1,16 @@
 package com.example.knu_first.versionConfig.service;
 
 
+import com.example.knu_first.versionConfig.dto.AddVersionRequestDto;
 import com.example.knu_first.versionConfig.dto.VersionConfigUpdateRequestDto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.repository.VersionConfigRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -17,6 +22,9 @@ public class VersionConfigService {
 
     private final VersionConfigRepository versionConfigRepository;
 
+    public VersionConfig save(AddVersionRequestDto requestDto){
+        return versionConfigRepository.save(requestDto.toEntity());
+    }
     public List<VersionConfig> findAllVersionConfig(){
         return versionConfigRepository.findAllByVisibleTrue();
     }
