@@ -56,8 +56,8 @@ public class VersionConfigController {
     public String DeleteVersionConfig(@PathVariable Long idx){
 
         versionConfigService.deleteVersionConfig(idx);
-        return "Delete Complete";
 
+        return "Delete Complete";
     }
 
     @GetMapping("/api/makeDummyData")

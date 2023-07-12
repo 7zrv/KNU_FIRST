@@ -47,12 +47,15 @@ public class VersionConfigService {
     }
 
 
-
-    public void deleteVersionConfig(Long idx) {
-        VersionConfig versionConfig = versionConfigRepository.findByIdx(idx)
+    @Transactional
+    public VersionConfig deleteVersionConfig(Long idx) {
+        VersionConfig versionConfig = versionConfigRepository.findById(idx)
                 .orElseThrow(() -> new IllegalArgumentException("failed delete! : " + idx));
 
         versionConfig.unVisibleVersionConfig();
+
+        return versionConfig;
+
     }
 
 
