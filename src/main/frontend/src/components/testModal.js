@@ -4,13 +4,13 @@ import axios from "axios";
 
 const TestModal = (props) => {
   const { isModalOpen, toggleModal, versionList } = props;
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValue, setSelectValue] = useState("ios");
   const [result, setResult] = useState("");
 
   const selectList =
     versionList &&
     versionList.map((item) => (
-      <option value={item.ver} key={item.idx}>
+      <option value={item.os} key={item.idx}>
         {item.idx}-{item.os}-{item.ver}
       </option>
     ));
@@ -20,15 +20,19 @@ const TestModal = (props) => {
   };
 
   const getVersion = () => {
-    const os = selectValue.split("-")[1];
+    const os = selectValue;
+    console.log(os);
     axios
-      .get("http://localhost:8080/api/vercontrol/getConfig", {
-        params: {
-          os: os,
-        },
+      .post("http://localhost:8080/api/vercontrol/getConfig", {
+        os,
       })
       .then((res) => {
-        setResult(res.data);
+        const data = {
+          ver: res.data.ver,
+          updatetype: res.data.updatetype,
+          message: res.data.message,
+        };
+        setResult(JSON.stringify(data));
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +51,9 @@ const TestModal = (props) => {
     >
       <div>Client Ver</div>
       <form>
-        <select onChange={selectChange}>{selectList}</select>
+        <select onChange={selectChange} value={selectValue}>
+          {selectList}
+        </select>
         <input type="button" value="제출" onClick={getVersion} />
       </form>
       <div>Server Result</div>

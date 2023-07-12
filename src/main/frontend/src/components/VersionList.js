@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./VersionList.css";
-import Header from "./components/header";
+import Header from "./header";
 
 const VersionList = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
-    console.log("dd");
     axios
       .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
