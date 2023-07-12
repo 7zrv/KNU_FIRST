@@ -41,6 +41,7 @@ const TestModal = (props) => {
 
   const handleConfirm = () => {
     alert("확인 버튼이 클릭되었습니다.");
+    toggleModal();
   };
 
   return (
