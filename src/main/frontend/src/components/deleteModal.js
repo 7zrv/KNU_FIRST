@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
@@ -30,6 +31,13 @@ const DeleteModal = (props) => {
     console.log(e.target.parentElement.parentElement);
     const element = document.getElementById(info.idx).parentElement;
     element.remove();
+    axios
+      .delete(`http://localhost:8080/api/vercontrol/delete/${info.idx}`)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
   };
 
   return (

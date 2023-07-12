@@ -1,16 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
 const AddModal = (props) => {
   const { isModalOpen, toggleModal } = props;
   const [selectOS, setSelectOS] = useState("ios");
-  const [selectUpdateType, setSelectUpdateType] = useState("1.0");
+  const [selectVersion, setSelectVersion] = useState("1.0");
+  const [selectUpdateType, setSelectUpdateType] = useState("true");
   const [selectMessage, setSelectMessage] = useState(
     "This is an update message."
   );
 
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
+  };
+  const selectVersionChange = (e) => {
+    setSelectVersion(e.target.value);
   };
   const selectUpdateTypeChange = (e) => {
     setSelectUpdateType(e.target.value);
@@ -25,6 +30,16 @@ const AddModal = (props) => {
 
   const onClickOk = function () {
     toggleModal();
+    axios
+      .post("http://localhost:8080/api/vercontrol/add", {
+        os: selectOS,
+        ver: selectVersion,
+        updateType: selectUpdateType,
+        message: selectMessage,
+        packagePath: "/path/to/package",
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -44,7 +59,7 @@ const AddModal = (props) => {
         </select>
       </form>
       <form>
-        <input></input>
+        <input onChange={selectVersionChange} value={selectVersion}></input>
       </form>
       <form>
         <select onChange={selectUpdateTypeChange} value={selectUpdateType}>
