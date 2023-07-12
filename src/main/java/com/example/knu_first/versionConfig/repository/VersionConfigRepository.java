@@ -7,6 +7,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -14,6 +15,10 @@ import java.util.Optional;
 public interface VersionConfigRepository extends JpaRepository<VersionConfig, Long> {
     Optional<VersionConfig> findTopByOsOrderByVersionDesc(String os);
 
+    List<VersionConfig> findAllByVisibleTrue();
+
     Slice<VersionConfig> findSliceByIdx(Long idx, Pageable pageable);
+
+
 
 }

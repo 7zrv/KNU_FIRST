@@ -1,10 +1,7 @@
 package com.example.knu_first.versionConfig.entity;
 
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -42,8 +39,10 @@ public class VersionConfig {
     @Column(name = "regdate")
     private LocalDateTime regdate;
 
+
+
     @Column(name = "visible")
-    private Boolean visible = true;
+    private Boolean visible;
 
 
     @Builder
@@ -53,16 +52,17 @@ public class VersionConfig {
         this.updatetype = updatetype;
         this.message = message;
         this.packagePath = packagePath;
+        this.visible = true;
     }
 
-    public void updateVersionConfig(String os, String version, String updatetype, String message){
+    public void updateVersion(String os, String version, String updatetype, String message){
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
     }
 
-    public void deleteVersionConfig(){
+    public void unVisibleVersionConfig(){
         this.visible = false;
     }
 }
