@@ -24,6 +24,7 @@
   background-color: darkcyan;
 }
 .testModal,
+.userTestModal,
 .addModal {
   display: flex;
   flex-direction: column;
@@ -81,4 +82,9 @@
 .delete {
   background: green;
   color: white;
+}
+
+.userTestModal textarea {
+  width: 80%;
+  height: 50px;
 }

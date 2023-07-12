@@ -34,7 +34,7 @@ const AddModal = (props) => {
       .post("http://localhost:8080/api/vercontrol/add", {
         os: selectOS,
         ver: selectVersion,
-        updateType: selectUpdateType,
+        updatetype: selectUpdateType,
         message: selectMessage,
         packagePath: "/path/to/package",
       })

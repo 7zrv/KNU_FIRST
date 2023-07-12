@@ -36,6 +36,7 @@ const DeleteModal = (props) => {
       .then((res) => console.log(res))
       .catch((err) => {
         console.log(err);
+        console.log(info.idx);
         return err;
       });
   };
@@ -51,31 +52,22 @@ const DeleteModal = (props) => {
           <option value={info.os} key={1}>
             {info.os}
           </option>
-          <option value={"android"} key={2}>
-            android
-          </option>
         </select>
       </form>
       <form>
-        <input></input>
+        <input value={info.ver} readOnly></input>
       </form>
       <form>
         <select onChange={selectUpdateTypeChange} value={selectUpdateType}>
-          <option value={"true"} key={1}>
-            true
-          </option>
-          <option value={"false"} key={0}>
-            false
+          <option value={info.updatetype} key={1}>
+            {info.updatetype}
           </option>
         </select>
       </form>
       <form>
         <select onChange={selectMessageChange} value={selectMessage}>
-          <option value={"This is an update message."} key={1}>
-            This is an update message.
-          </option>
-          <option value={"This is another update message."} key={0}>
-            This is another update message.
+          <option value={info.message} key={1}>
+            {info.message}
           </option>
         </select>
       </form>

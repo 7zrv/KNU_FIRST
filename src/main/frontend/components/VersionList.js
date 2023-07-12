@@ -3,12 +3,13 @@ import axios from "axios";
 import "./VersionList.css";
 import Header from "./header";
 import DeleteModal from "./deleteModal";
+import UserTestModal from "./userTestModal";
 
 const VersionList = () => {
   const [list, setList] = useState([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemInfos, setItemInfos] = useState({});
-  const [deleteElement, setDeleteElement] = useState(false);
+  const [userTestModalOpen, setUserTestModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -22,6 +23,24 @@ const VersionList = () => {
         return err;
       });
   }, []);
+
+  const onClickUserTestBtn = function (e) {
+    const trElement = e.currentTarget.parentNode.parentNode;
+    const tdElements = Array.from(trElement.querySelectorAll("td"));
+
+    const itemInfos = {
+      idx: tdElements[0].id,
+      os: tdElements[1].id,
+      ver: tdElements[2].id,
+      updatetype: tdElements[3].id,
+      message: tdElements[4].id,
+      packagePath: tdElements[5].id,
+      regdate: tdElements[6].id,
+    };
+
+    setItemInfos(itemInfos);
+    setUserTestModalOpen(true);
+  };
 
   const onClickDeleteBtn = function (e) {
     const trElement = e.currentTarget.parentNode.parentNode;
@@ -43,6 +62,7 @@ const VersionList = () => {
 
   const closeModal = function () {
     if (deleteModalOpen) setDeleteModalOpen(false);
+    if (userTestModalOpen) setUserTestModalOpen(false);
   };
 
   const tableList = list.map((item) => {
@@ -68,7 +88,9 @@ const VersionList = () => {
           id={`${item.regdate[0]} / ${item.regdate[1]} / ${item.regdate[2]}`}
         >{`${item.regdate[0]} / ${item.regdate[1]} / ${item.regdate[2]}`}</td>
         <td className="buttons">
-          <button className="testBtn">Test</button>
+          <button className="testBtn" onClick={onClickUserTestBtn}>
+            Test
+          </button>
           <button className="modBtn">수정</button>
           <button className="deleteBtn" onClick={onClickDeleteBtn}>
             삭제
@@ -97,6 +119,11 @@ const VersionList = () => {
           </thead>
         </table>
       </section>
+      <UserTestModal
+        isModalOpen={userTestModalOpen}
+        toggleModal={closeModal}
+        info={itemInfos}
+      ></UserTestModal>
       <DeleteModal
         isModalOpen={deleteModalOpen}
         toggleModal={closeModal}
