@@ -49,7 +49,7 @@ public class VersionConfigService {
 
 
     public void deleteVersionConfig(Long idx) {
-        VersionConfig versionConfig = versionConfigRepository.findById(idx)
+        VersionConfig versionConfig = versionConfigRepository.findByIdx(idx)
                 .orElseThrow(() -> new IllegalArgumentException("failed delete! : " + idx));
 
         versionConfig.unVisibleVersionConfig();

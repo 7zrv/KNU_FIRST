@@ -20,5 +20,5 @@ public interface VersionConfigRepository extends JpaRepository<VersionConfig, Lo
     Slice<VersionConfig> findSliceByIdx(Long idx, Pageable pageable);
 
 
-
+    Optional<VersionConfig> findByIdx(Long idx);
 }
