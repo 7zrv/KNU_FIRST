@@ -71,12 +71,14 @@
   font-weight: bold;
 }
 
-.addModal .buttons .no {
+.addModal .buttons .no,
+.cancle {
   background: red;
   color: white;
 }
 
-.addModal .buttons .ok {
+.addModal .buttons .ok,
+.delete {
   background: green;
   color: white;
 }
