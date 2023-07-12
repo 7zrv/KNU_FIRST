@@ -40,7 +40,7 @@ public class VersionConfigController {
     public ResponseEntity<VersionConfig> updateV(@PathVariable Long idx,
                                                        @RequestBody requestDto){
         Article updatedArticle = blogService.update(id, requestDto);
-//
+
         return ResponseEntity.ok().body(updatedArticle);
 
     }

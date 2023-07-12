@@ -43,7 +43,7 @@ public class VersionConfigService {
                 .message("This is another update message")
                 .packagePath("/path/to/package2")
                 .build();
-
+//
         // 더미 데이터 저장
         versionConfigRepository.save(versionConfig1);
         versionConfigRepository.save(versionConfig2);
