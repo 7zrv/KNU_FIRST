@@ -30,7 +30,7 @@ public class VersionConfig {
     private String version;
 
     @Column(name = "updatetype")
-    private boolean updatetype;
+    private String updatetype;
 
     @Column(name = "message")
     private String message;
@@ -47,7 +47,7 @@ public class VersionConfig {
 
 
     @Builder
-    public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath) {
+    public VersionConfig(String os, String version, String updatetype, String message, String packagePath) {
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
@@ -55,14 +55,14 @@ public class VersionConfig {
         this.packagePath = packagePath;
     }
 
-    public void updateVersionConfig(String os, String version, Boolean updatetype, String message){
+    public void updateVersion(String os, String version, String updatetype, String message){
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
     }
 
-    public void deleteVersionConfig(){
+    public void unvisibleVersionConfig(){
         this.visible = false;
     }
 }

@@ -3,6 +3,7 @@ package com.example.knu_first.versionConfig.controller;
 
 import com.example.knu_first.versionConfig.dto.OsRequestDto;
 import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
+import com.example.knu_first.versionConfig.dto.VersionConfigUpdateRequestDto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
@@ -37,11 +38,20 @@ public class VersionConfigController {
 
 
     @PutMapping("/api/vercontrol/update/{idx}")
-    public ResponseEntity<VersionConfig> updateV(@PathVariable Long idx,
-                                                       @RequestBody requestDto){
-        Article updatedArticle = blogService.update(id, requestDto);
+    public ResponseEntity<VersionConfig> updateVersionConfig(@PathVariable Long idx,
+                                                       @RequestBody VersionConfigUpdateRequestDto requestDto){
 
-        return ResponseEntity.ok().body(updatedArticle);
+        VersionConfig updatedVersionConfig = versionConfigService.updateVersionConfig(idx, requestDto);
+
+        return ResponseEntity.ok().body(updatedVersionConfig);
+
+    }
+
+    @DeleteMapping("/api/vercontrol/delete/{idx}")
+    public String DeleteVersionConfig(@PathVariable Long idx){
+
+        versionConfigService.deleteVersionConfig(idx);
+        return "Delete Complete";
 
     }
 

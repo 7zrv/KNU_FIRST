@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class VersionConfigUpdateRequestDto {
 
     private String os;
-    private String ver;
-    private Boolean updatetype;
+    private String version;
+    private String updatetype;
     private String message;
 
 }

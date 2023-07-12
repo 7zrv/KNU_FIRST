@@ -12,7 +12,7 @@ public class VersionConfigResponseDto {
     private final Long idx;
     private final String os;
     private final String ver;
-    private final Boolean updatetype;
+    private final String updatetype;
     private final String message;
     private final String packagePath;
     private final LocalDateTime regdate;
@@ -21,7 +21,7 @@ public class VersionConfigResponseDto {
         this.idx = versionConfig.getIdx();
         this.os = versionConfig.getOs();
         this.ver = versionConfig.getVersion();
-        this.updatetype = versionConfig.isUpdatetype();
+        this.updatetype = versionConfig.getUpdatetype();
         this.message = versionConfig.getMessage();
         this.packagePath = versionConfig.getPackagePath();
         this.regdate = versionConfig.getRegdate();
