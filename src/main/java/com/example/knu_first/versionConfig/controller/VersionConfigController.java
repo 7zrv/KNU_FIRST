@@ -3,6 +3,7 @@ package com.example.knu_first.versionConfig.controller;
 
 import com.example.knu_first.versionConfig.dto.OsRequestDto;
 import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
+import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,8 @@ public class VersionConfigController {
 
 
     @PutMapping("/api/vercontrol/update/{idx}")
-    public ResponseEntity<Article> updateArticle(@PathVariable Long idx,
-                                                 @RequestBody  requestDto){
+    public ResponseEntity<VersionConfig> updateV(@PathVariable Long idx,
+                                                       @RequestBody requestDto){
         Article updatedArticle = blogService.update(id, requestDto);
 
         return ResponseEntity.ok().body(updatedArticle);

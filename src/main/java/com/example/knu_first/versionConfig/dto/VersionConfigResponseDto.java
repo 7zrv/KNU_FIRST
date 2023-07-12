@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-
+//
 @Getter
 public class VersionConfigResponseDto {
     private final Long idx;

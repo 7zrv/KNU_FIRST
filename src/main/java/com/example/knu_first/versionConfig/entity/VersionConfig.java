@@ -45,6 +45,7 @@ public class VersionConfig {
     @Column(name = "visible")
     private Boolean visible = true;
 
+    //
     @Builder
     public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath) {
         this.os = os;
