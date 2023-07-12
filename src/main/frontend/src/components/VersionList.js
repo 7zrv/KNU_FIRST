@@ -17,13 +17,26 @@ const VersionList = () => {
       .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
-        console.log(res.data);
+        console.log(list);
       })
       .catch((err) => {
         console.log("VersionList ::: " + err);
         return err;
       });
   }, []);
+
+  const rendering = () => {
+    axios
+      .get("http://localhost:8080/api/vercontrol/getConfigAll")
+      .then((res) => {
+        setList(res.data);
+        console.log(list);
+      })
+      .catch((err) => {
+        console.log("VersionList ::: " + err);
+        return err;
+      });
+  };
 
   const onClickUserTestBtn = function (e) {
     const trElement = e.currentTarget.parentNode.parentNode;
@@ -117,7 +130,7 @@ const VersionList = () => {
   });
   return (
     <div>
-      <Header versionList={list} />
+      <Header versionList={list} rendering={rendering} />
       <section className="tableSection">
         <table className="table">
           <thead className="tableContainer">

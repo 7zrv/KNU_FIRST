@@ -21,7 +21,6 @@ const TestModal = (props) => {
 
   const getVersion = () => {
     const os = selectValue;
-    console.log(os);
     axios
       .post("http://localhost:8080/api/vercontrol/getConfig", {
         os,

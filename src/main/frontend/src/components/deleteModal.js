@@ -10,8 +10,6 @@ const DeleteModal = (props) => {
     "This is an update message."
   );
 
-  console.log(info);
-
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
   };
@@ -27,8 +25,6 @@ const DeleteModal = (props) => {
   };
 
   const onClickDelete = function (e) {
-    toggleModal();
-    console.log(e.target.parentElement.parentElement);
     const element = document.getElementById(info.idx).parentElement;
     element.remove();
     axios
@@ -38,6 +34,7 @@ const DeleteModal = (props) => {
         console.log("DeleteModal ::: " + err);
         return err;
       });
+    toggleModal();
   };
 
   return (

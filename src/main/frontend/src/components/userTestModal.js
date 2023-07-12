@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import axios from "axios";
 
 const UserTestModal = (props) => {
   const { isModalOpen, toggleModal, info, testResult } = props;
-  const [result, setResult] = useState("");
 
   const handleConfirm = () => {
     toggleModal();
