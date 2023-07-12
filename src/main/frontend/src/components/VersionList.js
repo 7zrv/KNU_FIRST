@@ -133,6 +133,7 @@ const VersionList = () => {
   const closeModal = function () {
     if (deleteModalOpen) setDeleteModalOpen(false);
     if (userTestModalOpen) setUserTestModalOpen(false);
+    if (modifyModalOpen) setModifyModalOpen(false);
   };
   const onClick = (e) => {
     const trElement = e.currentTarget.parentNode.parentNode;

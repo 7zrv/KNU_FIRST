@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import axios from "axios";
 
 const ModifyModal = (props) => {
   const { isModalOpen, toggleModal, info, items, setInfo } = props;
@@ -13,7 +14,6 @@ const ModifyModal = (props) => {
   const osOption = osArray.map((item) => {
     return <option value={item}>{item}</option>;
   });
-  console.log(osOption);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +22,20 @@ const ModifyModal = (props) => {
       [name]: value,
     });
   };
-  const onClickCancle = () => {};
+  const onClickCancle = () => {
+    toggleModal();
+  };
   const onClickModify = () => {
-    axios.put(`http://localhost:8080/api/vercontrol/update/${info.idx}`, info);
+    toggleModal();
+    axios
+      .put(`http://localhost:8080/api/vercontrol/update/${info.idx}`, {
+        os: info.os,
+        version: info.ver,
+        updatetype: info.updatetype,
+        message: info.message,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <Modal
