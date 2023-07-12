@@ -55,14 +55,14 @@ public class VersionConfig {
         this.packagePath = packagePath;
     }
 
-    public void updateVersion(String os, String version, String updatetype, String message){
+    public void updateVersionConfig(String os, String version, String updatetype, String message){
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
     }
 
-    public void unvisibleVersionConfig(){
+    public void deleteVersionConfig(){
         this.visible = false;
     }
 }

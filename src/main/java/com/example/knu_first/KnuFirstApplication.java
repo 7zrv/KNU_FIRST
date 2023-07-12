@@ -10,5 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class KnuFirstApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KnuFirstApplication.class, args);
+
 	}
 }
