@@ -34,7 +34,6 @@ public class VersionConfigService {
                 .updatetype(true)
                 .message("This is an update message")
                 .packagePath("/path/to/package1")
-                .regdate(LocalDateTime.now())
                 .build();
 
         VersionConfig versionConfig2 = VersionConfig.builder()
@@ -43,7 +42,6 @@ public class VersionConfigService {
                 .updatetype(false)
                 .message("This is another update message")
                 .packagePath("/path/to/package2")
-                .regdate(LocalDateTime.now())
                 .build();
 
         // 더미 데이터 저장

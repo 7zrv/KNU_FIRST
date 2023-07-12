@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class VersionConfigController {
 
     private final VersionConfigService versionConfigService;
-    
+
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){
 
@@ -32,6 +32,16 @@ public class VersionConfigController {
     @PostMapping("/api/vercontrol/getConfig")
     public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody OsRequestDto osRequestDto) throws Exception {
         return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto.getOs())));
+    }
+
+
+    @PutMapping("/api/vercontrol/update/{idx}")
+    public ResponseEntity<Article> updateArticle(@PathVariable Long idx,
+                                                 @RequestBody  requestDto){
+        Article updatedArticle = blogService.update(id, requestDto);
+
+        return ResponseEntity.ok().body(updatedArticle);
+
     }
 
     @GetMapping("/api/makeDummyData")

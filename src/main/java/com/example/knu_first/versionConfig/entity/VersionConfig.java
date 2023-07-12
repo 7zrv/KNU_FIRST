@@ -42,12 +42,8 @@ public class VersionConfig {
     @Column(name = "regdate")
     private LocalDateTime regdate;
 
-
-    @Builder.Default
     @Column(name = "visible")
     private Boolean visible = true;
-
-
 
     @Builder
     public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath) {
@@ -58,7 +54,14 @@ public class VersionConfig {
         this.packagePath = packagePath;
     }
 
-    public void updateVersionConfig(){
+    public void updateVersionConfig(String os, String version, Boolean updatetype, String message){
+        this.os = os;
+        this.version = version;
+        this.updatetype = updatetype;
+        this.message = message;
+    }
 
+    public void deleteVersionConfig(){
+        this.visible = false;
     }
 }
