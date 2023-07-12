@@ -39,7 +39,7 @@ const AddModal = (props) => {
         packagePath: "/path/to/package",
       })
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("AddModal ::: " + err));
   };
 
   return (

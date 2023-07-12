@@ -35,12 +35,11 @@ const TestModal = (props) => {
         setResult(JSON.stringify(data));
       })
       .catch((err) => {
-        console.log(err);
+        console.log("TestModal ::: " + err);
       });
   };
 
   const handleConfirm = () => {
-    alert("확인 버튼이 클릭되었습니다.");
     toggleModal();
   };
 

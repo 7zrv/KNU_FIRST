@@ -35,8 +35,7 @@ const DeleteModal = (props) => {
       .delete(`http://localhost:8080/api/vercontrol/delete/${info.idx}`)
       .then((res) => console.log(res))
       .catch((err) => {
-        console.log(err);
-        console.log(info.idx);
+        console.log("DeleteModal ::: " + err);
         return err;
       });
   };

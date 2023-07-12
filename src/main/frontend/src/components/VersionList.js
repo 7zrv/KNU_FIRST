@@ -10,6 +10,7 @@ const VersionList = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemInfos, setItemInfos] = useState({});
   const [userTestModalOpen, setUserTestModalOpen] = useState(false);
+  const [testResult, setTestResult] = useState("");
 
   useEffect(() => {
     axios
@@ -19,7 +20,7 @@ const VersionList = () => {
         console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("VersionList ::: " + err);
         return err;
       });
   }, []);
@@ -39,6 +40,21 @@ const VersionList = () => {
     };
 
     setItemInfos(itemInfos);
+    axios
+      .post("http://localhost:8080/api/vercontrol/getConfig", {
+        os: itemInfos.os,
+      })
+      .then((res) => {
+        const data = {
+          ver: res.data.ver,
+          updatetype: res.data.updatetype,
+          message: res.data.message,
+        };
+        setTestResult(JSON.stringify(data));
+      })
+      .catch((err) => {
+        console.log("UserTest ::: " + err);
+      });
     setUserTestModalOpen(true);
   };
 
@@ -123,6 +139,7 @@ const VersionList = () => {
         isModalOpen={userTestModalOpen}
         toggleModal={closeModal}
         info={itemInfos}
+        testResult={testResult}
       ></UserTestModal>
       <DeleteModal
         isModalOpen={deleteModalOpen}
