@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 
 const DeleteModal = (props) => {
-  const { isModalOpen, toggleModal, info } = props;
+  const { isModalOpen, toggleModal, info, rendering } = props;
   const [selectOS, setSelectOS] = useState("ios");
   const [selectUpdateType, setSelectUpdateType] = useState("1.0");
   const [selectMessage, setSelectMessage] = useState(
@@ -24,16 +24,18 @@ const DeleteModal = (props) => {
     toggleModal();
   };
 
-  const onClickDelete = function (e) {
-    const element = document.getElementById(info.idx).parentElement;
-    element.remove();
+  const onClickDelete = function () {
     axios
       .delete(`http://localhost:8080/api/vercontrol/delete/${info.idx}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        rendering();
+      })
       .catch((err) => {
         console.log("DeleteModal ::: " + err);
         return err;
       });
+
     toggleModal();
   };
 

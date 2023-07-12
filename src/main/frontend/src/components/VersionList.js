@@ -11,26 +11,47 @@ const VersionList = () => {
   const [itemInfos, setItemInfos] = useState({});
   const [userTestModalOpen, setUserTestModalOpen] = useState(false);
   const [testResult, setTestResult] = useState("");
+  const [pageList, setPageList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
-        console.log(list);
+        paginateList(res.data);
       })
       .catch((err) => {
         console.log("VersionList ::: " + err);
-        return err;
       });
   }, []);
+
+  const paginateList = (data) => {
+    const perPage = 10;
+    const totalPages = Math.ceil(data.length / perPage);
+    const newPageList = [];
+
+    for (let i = 0; i < totalPages; i++) {
+      const start = i * perPage;
+      const end = start + perPage;
+      const page = data.slice(start, end);
+      newPageList.push(page);
+    }
+
+    setPageList(newPageList);
+  };
+
+  useEffect(() => {
+    console.log(list);
+    console.log(pageList);
+  }, [list]);
 
   const rendering = () => {
     axios
       .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
-        console.log(list);
+        paginateList(res.data);
       })
       .catch((err) => {
         console.log("VersionList ::: " + err);
@@ -94,14 +115,14 @@ const VersionList = () => {
     if (userTestModalOpen) setUserTestModalOpen(false);
   };
 
-  const tableList = list.map((item) => {
+  const tableList = pageList[currentPage - 1]?.map((item) => {
     let backgroundColor = "gainsboro";
     if (item.idx % 2 === 0) {
       backgroundColor = "lightblue";
     }
     return (
       <tr
-        key={item.idx}
+        id={item.idx}
         className="record"
         style={{
           background: backgroundColor,
@@ -158,7 +179,30 @@ const VersionList = () => {
         isModalOpen={deleteModalOpen}
         toggleModal={closeModal}
         info={itemInfos}
+        rendering={rendering}
       ></DeleteModal>
+      <section className="pageSection">
+        <button
+          className="previousBtn"
+          onClick={() => {
+            if (currentPage > 1) setCurrentPage(currentPage - 1);
+          }}
+        >
+          &lt;
+        </button>
+        <span className="currentPage">
+          {" "}
+          {currentPage} / {pageList.length}{" "}
+        </span>
+        <button
+          className="nextBtn"
+          onClick={() => {
+            if (currentPage < pageList.length) setCurrentPage(currentPage + 1);
+          }}
+        >
+          &gt;
+        </button>
+      </section>
     </div>
   );
 };
