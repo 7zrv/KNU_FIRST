@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "version_config")
 public class VersionConfig {
 
@@ -29,25 +32,33 @@ public class VersionConfig {
     @Column(name = "updatetype")
     private boolean updatetype;
 
-
-    @Column(name = "regdate")
-    private LocalDateTime regdate;
-
     @Column(name = "message")
     private String message;
 
     @Column(name = "package")
     private String packagePath;
 
+    @LastModifiedDate
+    @Column(name = "regdate")
+    private LocalDateTime regdate;
+
+
+    @Builder.Default
+    @Column(name = "visible")
+    private Boolean visible = true;
+
 
 
     @Builder
-    public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath,LocalDateTime regdate) {
+    public VersionConfig(String os, String version, boolean updatetype, String message, String packagePath) {
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
         this.packagePath = packagePath;
-        this.regdate = regdate;
+    }
+
+    public void updateVersionConfig(){
+
     }
 }

@@ -17,9 +17,7 @@ import java.util.stream.Collectors;
 public class VersionConfigController {
 
     private final VersionConfigService versionConfigService;
-
-
-
+    
     @GetMapping("/api/vercontrol/getConfigAll")
     public ResponseEntity<List<VersionConfigResponseDto>> findAllVersionConfigs(){
 

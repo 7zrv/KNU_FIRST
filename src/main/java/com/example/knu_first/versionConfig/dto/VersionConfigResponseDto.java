@@ -3,7 +3,7 @@ package com.example.knu_first.versionConfig.dto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import lombok.Getter;
 
-import javax.persistence.Column;
+
 import java.time.LocalDateTime;
 
 
