@@ -23,7 +23,7 @@
 .headerBar .testBtn {
   background-color: darkcyan;
 }
-.modal {
+.testModal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,6 +33,7 @@
   width: 30%;
   height: 30%;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

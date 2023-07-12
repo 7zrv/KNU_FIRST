@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 
-const MyModal = (props) => {
+const TestModal = (props) => {
   const { isModalOpen, toggleModal, versionList } = props;
   const [selectValue, setSelectValue] = useState("");
   const [result, setResult] = useState("");
@@ -40,7 +40,11 @@ const MyModal = (props) => {
   };
 
   return (
-    <Modal isOpen={isModalOpen} onRequestClose={toggleModal}>
+    <Modal
+      className={"testModal"}
+      isOpen={isModalOpen}
+      onRequestClose={toggleModal}
+    >
       <div>Client Ver</div>
       <form>
         <select onChange={selectChange}>{selectList}</select>
@@ -53,4 +57,4 @@ const MyModal = (props) => {
   );
 };
 
-export default MyModal;
+export default TestModal;

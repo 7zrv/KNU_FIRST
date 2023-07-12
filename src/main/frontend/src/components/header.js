@@ -1,6 +1,6 @@
 import { Component, useState } from "react";
 import "./header.css";
-import MyModal from "./modal";
+import TestModal from "./testModal";
 
 export default function Header(props) {
   const { versionList } = props;
@@ -24,7 +24,7 @@ export default function Header(props) {
       <button className="testBtn" onClick={onClickTest}>
         APP TEST
       </button>
-      <MyModal
+      <TestModal
         isModalOpen={isModalOpen}
         toggleModal={toggleModal}
         versionList={versionList}
