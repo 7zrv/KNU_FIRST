@@ -1,16 +1,19 @@
 import { Component, useState } from "react";
 import "./header.css";
-import Modal from "./modal";
+import TestModal from "./testModal";
 
 export default function Header(props) {
-  const [openTest, setOpenTest] = useState(false);
   const { versionList } = props;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const onClickAdd = function () {
     console.log("Add Clicked");
   };
   const onClickTest = function () {
     console.log("Test Clicked");
-    setOpenTest(!openTest);
+    setIsModalOpen(true);
+  };
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -21,9 +24,11 @@ export default function Header(props) {
       <button className="testBtn" onClick={onClickTest}>
         APP TEST
       </button>
-      {openTest ? (
-        <Modal versionList={versionList} setOpenTest={setOpenTest} />
-      ) : null}
+      <TestModal
+        isModalOpen={isModalOpen}
+        toggleModal={toggleModal}
+        versionList={versionList}
+      />
     </section>
   );
 }

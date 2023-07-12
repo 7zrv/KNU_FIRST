@@ -1,0 +1,45 @@
+.table {
+  margin-top: 15px;
+  border: 2px solid black;
+  width: 100%;
+  padding: 15px;
+}
+
+.tableHeader > th {
+  text-align: start;
+  font-weight: bolder;
+  font-size: 20px;
+  height: 30px;
+  background-color: grey;
+  color: white;
+  border: 2px solid black;
+  padding: 5px 10px 5px 10px;
+}
+
+.record > td {
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid black;
+  padding: 5px 10px 5px 10px;
+}
+
+.record .buttons {
+  width: 210px;
+}
+
+.record .buttons > button {
+  width: 70px;
+  height: 50px;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.testBtn {
+  background: yellow;
+}
+.modBtn {
+  background: green;
+}
+.deleteBtn {
+  background: red;
+}

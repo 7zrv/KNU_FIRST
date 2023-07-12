@@ -1,65 +1,54 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./VersionList.css";
-import Header from "./components/header";
+import Header from "./header";
 
 const VersionList = () => {
-  const tempData = (
-    <section className="record">
-      <tr key="1">
-        <td>1</td>
-        <td>iOS</td>
-        <td>1.0</td>
-        <td>true</td>
-        <td>null</td>
-        <td>com.test.myApp</td>
-        <td>2023-01-01</td>
-        <td>
-          <button className="testBtn">Test</button>
-          <button className="modBtn">수정</button>
-          <button className="delBtn">삭제</button>
-        </td>
-      </tr>
-    </section>
-  );
-
   const [list, setList] = useState([]);
   useEffect(() => {
-      console.log("dd");
     axios
       .get("http://localhost:8080/api/vercontrol/getConfigAll")
       .then((res) => {
         setList(res.data);
-
       })
       .catch((err) => {
-          console.log(err)
+        console.log(err);
         return err;
       });
-  });
+  }, []);
   const tableList = list.map((item) => {
+    let backgroundColor = "gainsboro";
+    if (item.idx % 2 === 0) {
+      backgroundColor = "lightblue";
+    }
     return (
-      <tr key={item.idx}>
+      <tr
+        key={item.idx}
+        className="record"
+        style={{
+          background: backgroundColor,
+        }}
+      >
         <td>{item.idx}</td>
         <td>{item.os}</td>
         <td>{item.ver}</td>
         <td>{item.updatetype}</td>
         <td>{item.message}</td>
         <td>{item.packagePath}</td>
-        <td>{item.regdate}</td>
-        <td>
-          <button>Test</button>
-          <button>수정</button>
-          <button>삭제</button>
+        <td>{`${item.regdate[0]} / ${item.regdate[1]} /${item.regdate[2]}`}</td>
+        <td className="buttons">
+          <button className="testBtn">Test</button>
+          <button className="modBtn">수정</button>
+          <button className="deleteBtn">삭제</button>
         </td>
       </tr>
     );
   });
   return (
-    <>
-      <Header versionList={list} />
-      <section>
-        <table>
+    <div>
+      {list.length > 0 && <Header versionList={list} />}
+      <section className="tableSection">
+        <table className="table">
           <thead className="tableContainer">
             <tr className="tableHeader">
               <th>idx</th>
@@ -75,7 +64,7 @@ const VersionList = () => {
           </thead>
         </table>
       </section>
-    </>
+    </div>
   );
 };
 
