@@ -149,6 +149,7 @@ const VersionList = () => {
       </tr>
     );
   });
+
   return (
     <div>
       <Header versionList={list} rendering={rendering} />
@@ -168,6 +169,11 @@ const VersionList = () => {
             {tableList}
           </thead>
         </table>
+        {/* <ModifyModal
+          currentItem={currentItem.data}
+          items={list}
+          type={currentItem.type}
+        /> */}
       </section>
       <UserTestModal
         isModalOpen={userTestModalOpen}
