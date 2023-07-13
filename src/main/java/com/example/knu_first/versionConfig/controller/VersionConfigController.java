@@ -38,12 +38,13 @@ public class VersionConfigController {
 
     @PostMapping("/api/vercontrol/getConfig")
     public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody OsRequestDto osRequestDto) throws Exception {
-        String force = versionConfigService.getForceUpadteVerify(osRequestDto);
-
         return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto)));
     }
 
-
+    @PostMapping("/api/vercontrol/test")
+    public ResponseEntity<AppTestResponseDto> TestVersionConfig(@RequestBody OsRequestDto osRequestDto) throws Exception {
+        return ResponseEntity.ok().body(new AppTestResponseDto(versionConfigService.getForceUpadteVerify(osRequestDto)));
+    }
     @PutMapping("/api/vercontrol/update/{idx}")
     public ResponseEntity<VersionConfig> updateVersionConfig(@PathVariable Long idx,
                                                        @RequestBody VersionConfigUpdateRequestDto requestDto){
