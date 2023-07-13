@@ -4,22 +4,30 @@ import Modal from "react-modal";
 
 const AddModal = (props) => {
   const { isModalOpen, toggleModal, rendering } = props;
+
+  // 상태 변수 초기화
   const [selectOS, setSelectOS] = useState("ios");
-  const [selectVersion, setSelectVersion] = useState("1.0");
+  const [selectVersion, setSelectVersion] = useState("");
   const [selectUpdateType, setSelectUpdateType] = useState("false");
   const [selectMessage, setSelectMessage] = useState(
     "This is an update message."
   );
-  const [validCheck, setValidCheck] = useState(false);
+  const [minVersion, setMinVersion] = useState("");
 
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
   };
+
   const selectVersionChange = (e) => {
     setSelectVersion(e.target.value);
   };
+
   const selectMessageChange = (e) => {
     setSelectMessage(e.target.value);
+  };
+
+  const selectMinVersionChange = (e) => {
+    setMinVersion(e.target.value);
   };
 
   const validAdd = async function () {
@@ -73,10 +81,10 @@ const AddModal = (props) => {
           updatetype: selectUpdateType,
           message: selectMessage,
           packagePath: "/path/to/package",
+          minVersion: minVersion,
         })
         .then((res) => {
           console.log("AddModal Complete");
-          setValidCheck("false");
           rendering();
         })
         .catch((err) => console.log("AddModal ::: " + err));
@@ -104,7 +112,18 @@ const AddModal = (props) => {
         </select>
       </form>
       <form>
-        <input onChange={selectVersionChange} value={selectVersion}></input>
+        <input
+          onChange={selectMinVersionChange}
+          value={minVersion}
+          placeholder="Enter minimum version..."
+        ></input>
+      </form>
+      <form>
+        <input
+          onChange={selectVersionChange}
+          value={selectVersion}
+          placeholder="Enter update version..."
+        ></input>
       </form>
       <form>
         <select onChange={selectMessageChange} value={selectMessage}>
