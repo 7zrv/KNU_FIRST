@@ -90,7 +90,7 @@ public class VersionConfigService {
                     .packagePath("/path/to/package" + (i + 1))
                     .minVersion("2.0")
                     .build();
-
+//
             VersionConfig versionConfig2 = VersionConfig.builder()
                     .os("android")
                     .version(version)
