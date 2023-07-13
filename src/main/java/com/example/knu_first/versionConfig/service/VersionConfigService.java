@@ -39,15 +39,15 @@ public class VersionConfigService {
     }
     public String getForceUpadteVerify (OsRequestDto osRequestDto) {
         String os = osRequestDto.getOs();
-        int ver = Integer.parseInt(osRequestDto.getVer());
-        VersionConfig versionConfig = versionConfigRepository.findTopByOsOrderByVersionDesc(osRequestDto.getOs()).orElse(null);
-        int minver = Integer.parseInt(versionConfig.getMinVersion());
+        double ver = Double.parseDouble(osRequestDto.getVer());
+        VersionConfig versionConfig = versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElse(null);
+        double minver = Double.parseDouble(versionConfig.getMinVersion());
         if(ver < minver){
             return "Force update : Yes";
 
         }
         else {
-            return "Force update : Yes";
+            return "Force update : NO";
         }
     }
     @Transactional
