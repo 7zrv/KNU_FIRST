@@ -12,50 +12,34 @@ const VersionList = () => {
   const [itemInfos, setItemInfos] = useState({}); // 선택한 항목에 대한 정보를 저장하는 상태 변수
   const [userTestModalOpen, setUserTestModalOpen] = useState(false); // 사용자 테스트 모달의 열림 여부를 추적하는 상태 변수
   const [testResult, setTestResult] = useState(""); // 사용자 테스트 결과를 저장하는 상태 변수
-  const [pageList, setPageList] = useState([]); // 페이지별로 분할된 버전 목록을 저장하는 상태 변수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호를 추적하는 상태 변수
+  const [maxPage, setMaxPage] = useState(1);
   const [modifyModalOpen, setModifyModalOpen] = useState(false); // 수정 모달의 열림 여부를 추적하는 상태 변수
 
   useEffect(() => {
     // 컴포넌트가 마운트될 때 버전 목록을 가져오기 위해 axios를 사용하여 API 호출
     axios
-      .get("http://localhost:8080/api/vercontrol/getConfigAll")
-      .then((res) => {
-        setList(res.data);
-        paginateList(res.data); // 버전 목록을 페이지별로 분할
+      .post("http://localhost:8080/api/vercontrol/page", {
+        page: currentPage - 1,
       })
-      .catch((err) => {
-        console.log("VersionList ::: " + err);
-      });
-  }, []);
-
-  const paginateList = (data) => {
-    const perPage = 10;
-    const totalPages = Math.ceil(data.length / perPage);
-    const newPageList = [];
-
-    for (let i = 0; i < totalPages; i++) {
-      const start = i * perPage;
-      const end = start + perPage;
-      const page = data.slice(start, end);
-      newPageList.push(page);
-    }
-
-    setPageList(newPageList);
-  };
+      .then((res) => {
+        setList(res.data.content);
+        setMaxPage(res.data.totalPages);
+      })
+      .catch((err) => console.log(err));
+  }, [currentPage]);
 
   const rendering = () => {
     // 버전 목록을 다시 가져오기 위해 API를 호출
     axios
-      .get("http://localhost:8080/api/vercontrol/getConfigAll")
-      .then((res) => {
-        setList(res.data);
-        paginateList(res.data);
+      .post("http://localhost:8080/api/vercontrol/page", {
+        page: currentPage - 1,
       })
-      .catch((err) => {
-        console.log("VersionList ::: " + err);
-        return err;
-      });
+      .then((res) => {
+        setList(res.data.content);
+        setMaxPage(res.data.totalPages);
+      })
+      .catch((err) => console.log(err));
   };
 
   const onClickUserTestBtn = function (e) {
@@ -75,18 +59,16 @@ const VersionList = () => {
     };
     setItemInfos(itemInfos);
 
+    console.log(itemInfos);
+
     // 레코드 테스트 진행을 위해 getConfig API 호출
     axios
-      .post("http://localhost:8080/api/vercontrol/getConfig", {
+      .post("http://localhost:8080/api/vercontrol/test", {
         os: itemInfos.os,
+        ver: itemInfos.ver,
       })
       .then((res) => {
-        const data = {
-          ver: res.data.ver,
-          updatetype: res.data.updatetype,
-          message: res.data.message,
-        };
-        setTestResult(JSON.stringify(data)); // 테스트 결과를 문자열로 변환
+        setTestResult(JSON.stringify(res.data)); // 테스트 결과를 문자열로 변환
       })
       .catch((err) => {
         console.log("UserTest ::: " + err);
@@ -152,7 +134,7 @@ const VersionList = () => {
   /**
    * pageList에 들어있는 정보들을 레코드 형태로 변환하여 담아놓은 array
    */
-  const tableList = pageList[currentPage - 1]?.map((item) => {
+  const tableList = list.map((item) => {
     let backgroundColor = "gainsboro";
     if (item.idx % 2 === 0) {
       backgroundColor = "lightblue";
@@ -167,7 +149,7 @@ const VersionList = () => {
       >
         <td id={item.idx}>{item.idx}</td>
         <td id={item.os}>{item.os}</td>
-        <td id={item.ver}>{item.ver}</td>
+        <td id={item.version}>{item.version}</td>
         <td id={item.updatetype}>{item.updatetype}</td>
         <td id={item.message}>{item.message}</td>
         <td id={item.packagePath}>{item.packagePath}</td>
@@ -233,19 +215,24 @@ const VersionList = () => {
         <button
           className="previousBtn"
           onClick={() => {
-            if (currentPage > 1) setCurrentPage(currentPage - 1);
+            if (currentPage > 1) {
+              setCurrentPage(currentPage - 1);
+            }
           }}
         >
           &lt;
         </button>
         <span className="currentPage">
           {" "}
-          {currentPage} / {pageList.length}{" "}
+          {currentPage} / {maxPage}{" "}
         </span>
         <button
           className="nextBtn"
           onClick={() => {
-            if (currentPage < pageList.length) setCurrentPage(currentPage + 1);
+            if (currentPage < maxPage) {
+              setCurrentPage(currentPage + 1);
+            }
+            console.log(currentPage);
           }}
         >
           &gt;
