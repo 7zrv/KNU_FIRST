@@ -178,19 +178,9 @@ const VersionList = () => {
     );
   });
 
-  const pageTest = () => {
-    axios
-      .post("https://localhost:8080/api/vercontrol/page", {
-        page: 1,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
   return (
     <div>
       <Header versionList={list} rendering={rendering} />
-      <button onClick={pageTest}>Page Test</button>
       <section className="tableSection">
         <table className="table">
           <thead className="tableContainer">

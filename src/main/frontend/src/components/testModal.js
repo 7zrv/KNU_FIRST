@@ -20,10 +20,9 @@ const TestModal = (props) => {
   };
 
   const getVersion = () => {
-    const os = selectValue;
     axios
       .post("http://localhost:8080/api/vercontrol/getConfig", {
-        os,
+        os: selectValue,
       })
       .then((res) => {
         const data = {
@@ -43,21 +42,26 @@ const TestModal = (props) => {
   };
 
   return (
-    <Modal
-      className={"testModal"}
-      isOpen={isModalOpen}
-      onRequestClose={toggleModal}
-    >
+    <Modal className={"testModal"} isOpen={isModalOpen}>
       <div>Client Ver</div>
-      <form>
+      <form className="submitForm">
         <select onChange={selectChange} value={selectValue}>
           {selectList}
         </select>
-        <input type="button" value="제출" onClick={getVersion} />
+        <button type="button" className="submitBtn" onClick={getVersion}>
+          제출
+        </button>
       </form>
       <div>Server Result</div>
       <textarea value={result} readOnly />
-      <button onClick={handleConfirm}>확인</button>
+      <section className="buttons">
+        <button className="cancle" onClick={handleConfirm}>
+          취소
+        </button>
+        <button className="ok" onClick={handleConfirm}>
+          확인
+        </button>
+      </section>
     </Modal>
   );
 };

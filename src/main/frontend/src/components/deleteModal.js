@@ -40,11 +40,7 @@ const DeleteModal = (props) => {
   };
 
   return (
-    <Modal
-      className={"addModal"}
-      isOpen={isModalOpen}
-      onRequestClose={toggleModal}
-    >
+    <Modal className={"addModal"} isOpen={isModalOpen}>
       <form>
         <select onChange={selectOsChange} value={selectOS}>
           <option value={info.os} key={1}>

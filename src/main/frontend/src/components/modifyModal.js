@@ -3,9 +3,7 @@ import Modal from "react-modal";
 import axios from "axios";
 
 const ModifyModal = (props) => {
-  const { isModalOpen, toggleModal, info, items, setInfo } = props;
-  console.log(info);
-  console.log(items);
+  const { isModalOpen, toggleModal, info, items, setInfo, rendering } = props;
   const osList = items.map((item) => {
     return item.os;
   });
@@ -21,10 +19,13 @@ const ModifyModal = (props) => {
       ...info,
       [name]: value,
     });
+    console.log(value);
+    console.log(info);
   };
   const onClickCancle = () => {
     toggleModal();
   };
+
   const onClickModify = () => {
     toggleModal();
     axios
@@ -34,22 +35,24 @@ const ModifyModal = (props) => {
         updatetype: info.updatetype,
         message: info.message,
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log("Modified");
+        rendering();
+      })
+      .catch((err) => console.log("Modify ERR ::: " + err));
   };
   return (
-    <Modal
-      className={"addModal"}
-      isOpen={isModalOpen}
-      onRequestClose={toggleModal}
-    >
-      <select name="os" onChange={handleChange}>
+    <Modal className={"modifyModal"} isOpen={isModalOpen}>
+      <select className="selectOS" name="os" onChange={handleChange}>
         {osOption}
       </select>
       <textarea name="ver" onChange={handleChange}>
         {info.ver}
       </textarea>
       <select name="updatetype" onChange={handleChange}>
+        <option value="none" disabled selected>
+          none
+        </option>
         <option value="true">true</option>
         <option value="false">false</option>
       </select>

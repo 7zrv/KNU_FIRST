@@ -6,10 +6,11 @@ const AddModal = (props) => {
   const { isModalOpen, toggleModal, rendering } = props;
   const [selectOS, setSelectOS] = useState("ios");
   const [selectVersion, setSelectVersion] = useState("1.0");
-  const [selectUpdateType, setSelectUpdateType] = useState("true");
+  const [selectUpdateType, setSelectUpdateType] = useState("false");
   const [selectMessage, setSelectMessage] = useState(
     "This is an update message."
   );
+  const [validCheck, setValidCheck] = useState(false);
 
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
@@ -17,32 +18,73 @@ const AddModal = (props) => {
   const selectVersionChange = (e) => {
     setSelectVersion(e.target.value);
   };
-  const selectUpdateTypeChange = (e) => {
-    setSelectUpdateType(e.target.value);
-  };
   const selectMessageChange = (e) => {
     setSelectMessage(e.target.value);
   };
 
-  const onClickNo = function () {
-    toggleModal();
+  const validAdd = async function () {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/vercontrol/getConfig",
+        {
+          os: selectOS,
+        }
+      );
+
+      if (parseFloat(response.data.ver) < parseFloat(selectVersion)) {
+        console.log(
+          `Current Ver :: ${parseFloat(
+            response.data.ver
+          )} //// Add Ver :: ${parseFloat(selectVersion)}  =>> ${
+            parseFloat(response.data.ver) < parseFloat(selectVersion)
+          }`
+        );
+        return true;
+      } else {
+        console.log(
+          `Current Ver :: ${parseFloat(
+            response.data.ver
+          )} //// Add Ver :: ${parseFloat(selectVersion)}  =>> ${
+            parseFloat(response.data.ver) < parseFloat(selectVersion)
+          }`
+        );
+        return false;
+      }
+    } catch (err) {
+      console.log(err.request.status);
+      if (err.request.status === 500) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   };
 
-  const onClickOk = function () {
+  const onClickOk = async function () {
     toggleModal();
-    axios
-      .post("http://localhost:8080/api/vercontrol/add", {
-        os: selectOS,
-        ver: selectVersion,
-        updatetype: selectUpdateType,
-        message: selectMessage,
-        packagePath: "/path/to/package",
-      })
-      .then((res) => {
-        console.log(res);
-        rendering();
-      })
-      .catch((err) => console.log("AddModal ::: " + err));
+
+    const isValid = await validAdd(); // validAdd 함수의 결과를 기다립니다.
+
+    if (isValid) {
+      axios
+        .post("http://localhost:8080/api/vercontrol/add", {
+          os: selectOS,
+          ver: selectVersion,
+          updatetype: selectUpdateType,
+          message: selectMessage,
+          packagePath: "/path/to/package",
+        })
+        .then((res) => {
+          console.log("AddModal Complete");
+          setValidCheck("false");
+          rendering();
+        })
+        .catch((err) => console.log("AddModal ::: " + err));
+    }
+  };
+
+  const onClickNo = function () {
+    toggleModal();
   };
 
   return (
@@ -63,16 +105,6 @@ const AddModal = (props) => {
       </form>
       <form>
         <input onChange={selectVersionChange} value={selectVersion}></input>
-      </form>
-      <form>
-        <select onChange={selectUpdateTypeChange} value={selectUpdateType}>
-          <option value={"true"} key={1}>
-            true
-          </option>
-          <option value={"false"} key={0}>
-            false
-          </option>
-        </select>
       </form>
       <form>
         <select onChange={selectMessageChange} value={selectMessage}>
