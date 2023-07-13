@@ -34,9 +34,22 @@ public class VersionConfigService {
     }
 
     public VersionConfig findVersionConfigByOs(OsRequestDto osRequestDto) throws Exception{
+
         return versionConfigRepository.findTopByOsOrderByVersionDesc(osRequestDto.getOs()).orElse(null);
     }
-    public
+    public String getForceUpadteVerify (OsRequestDto osRequestDto) {
+        String os = osRequestDto.getOs();
+        int ver = Integer.parseInt(osRequestDto.getVer());
+        VersionConfig versionConfig = versionConfigRepository.findTopByOsOrderByVersionDesc(osRequestDto.getOs()).orElse(null);
+        int minver = Integer.parseInt(versionConfig.getMinVersion());
+        if(ver < minver){
+            return "Force update : Yes";
+
+        }
+        else {
+            return "Force update : Yes";
+        }
+    }
     @Transactional
     public VersionConfig updateVersionConfig(Long idx, VersionConfigUpdateRequestDto requestDto){
         VersionConfig versionConfig = versionConfigRepository.findById(idx)

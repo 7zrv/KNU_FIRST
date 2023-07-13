@@ -38,7 +38,9 @@ public class VersionConfigController {
 
     @GetMapping("/api/vercontrol/getConfig")
     public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody OsRequestDto osRequestDto) throws Exception {
-        return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto.getOs())));
+        String force = versionConfigService.getForceUpadteVerify(osRequestDto);
+
+        return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto)));
     }
 
 
