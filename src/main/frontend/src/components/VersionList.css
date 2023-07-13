@@ -30,18 +30,21 @@
 .record .buttons > button {
   width: 70px;
   height: 50px;
-  font-size: larger;
+  font-size: 20px;
   font-weight: bolder;
 }
 
 .testBtn {
-  background: yellow;
+  background: blue;
+  color: white;
 }
 .modBtn {
   background: green;
+  color: white;
 }
 .deleteBtn {
   background: red;
+  color: white;
 }
 
 .pageSection {
