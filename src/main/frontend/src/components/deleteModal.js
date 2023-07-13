@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 
 const DeleteModal = (props) => {
-  const { isModalOpen, toggleModal, info } = props;
+  const { isModalOpen, toggleModal, info, rendering } = props;
   const [selectOS, setSelectOS] = useState("ios");
   const [selectUpdateType, setSelectUpdateType] = useState("1.0");
   const [selectMessage, setSelectMessage] = useState(
     "This is an update message."
   );
-
-  console.log(info);
 
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
@@ -26,18 +24,19 @@ const DeleteModal = (props) => {
     toggleModal();
   };
 
-  const onClickDelete = function (e) {
-    toggleModal();
-    console.log(e.target.parentElement.parentElement);
-    const element = document.getElementById(info.idx).parentElement;
-    element.remove();
+  const onClickDelete = function () {
     axios
       .delete(`http://localhost:8080/api/vercontrol/delete/${info.idx}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        rendering();
+      })
       .catch((err) => {
-        console.log(err);
+        console.log("DeleteModal ::: " + err);
         return err;
       });
+
+    toggleModal();
   };
 
   return (
@@ -51,31 +50,22 @@ const DeleteModal = (props) => {
           <option value={info.os} key={1}>
             {info.os}
           </option>
-          <option value={"android"} key={2}>
-            android
-          </option>
         </select>
       </form>
       <form>
-        <input></input>
+        <input value={info.ver} readOnly></input>
       </form>
       <form>
         <select onChange={selectUpdateTypeChange} value={selectUpdateType}>
-          <option value={"true"} key={1}>
-            true
-          </option>
-          <option value={"false"} key={0}>
-            false
+          <option value={info.updatetype} key={1}>
+            {info.updatetype}
           </option>
         </select>
       </form>
       <form>
         <select onChange={selectMessageChange} value={selectMessage}>
-          <option value={"This is an update message."} key={1}>
-            This is an update message.
-          </option>
-          <option value={"This is another update message."} key={0}>
-            This is another update message.
+          <option value={info.message} key={1}>
+            {info.message}
           </option>
         </select>
       </form>

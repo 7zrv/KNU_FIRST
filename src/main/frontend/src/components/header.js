@@ -2,9 +2,10 @@ import { Component, useState } from "react";
 import "./header.css";
 import TestModal from "./testModal";
 import AddModal from "./addModal";
+import axios from "axios";
 
 export default function Header(props) {
-  const { versionList } = props;
+  const { versionList, rendering } = props;
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [testModalOpen, setTestModalOpen] = useState(false);
   const onClickAdd = function () {
@@ -32,7 +33,11 @@ export default function Header(props) {
       <button className="testBtn" onClick={onClickTest}>
         APP TEST
       </button>
-      <AddModal isModalOpen={addModalOpen} toggleModal={closeModal} />
+      <AddModal
+        isModalOpen={addModalOpen}
+        toggleModal={closeModal}
+        rendering={rendering}
+      />
       <TestModal
         isModalOpen={testModalOpen}
         toggleModal={closeModal}

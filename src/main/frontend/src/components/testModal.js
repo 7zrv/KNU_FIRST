@@ -10,18 +10,17 @@ const TestModal = (props) => {
   const selectList =
     versionList &&
     versionList.map((item) => (
-      <option value={item.os} key={item.idx}>
+      <option value={item.idx - item.os} key={item.idx}>
         {item.idx}-{item.os}-{item.ver}
       </option>
     ));
 
   const selectChange = (e) => {
-    setSelectValue(e.target.value);
+    setSelectValue(e.target.value.split("-")[1]);
   };
 
   const getVersion = () => {
     const os = selectValue;
-    console.log(os);
     axios
       .post("http://localhost:8080/api/vercontrol/getConfig", {
         os,
@@ -35,12 +34,11 @@ const TestModal = (props) => {
         setResult(JSON.stringify(data));
       })
       .catch((err) => {
-        console.log(err);
+        console.log("TestModal ::: " + err);
       });
   };
 
   const handleConfirm = () => {
-    alert("확인 버튼이 클릭되었습니다.");
     toggleModal();
   };
 

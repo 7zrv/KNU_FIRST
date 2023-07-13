@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 
 const AddModal = (props) => {
-  const { isModalOpen, toggleModal } = props;
+  const { isModalOpen, toggleModal, rendering } = props;
   const [selectOS, setSelectOS] = useState("ios");
   const [selectVersion, setSelectVersion] = useState("1.0");
   const [selectUpdateType, setSelectUpdateType] = useState("true");
@@ -34,12 +34,15 @@ const AddModal = (props) => {
       .post("http://localhost:8080/api/vercontrol/add", {
         os: selectOS,
         ver: selectVersion,
-        updateType: selectUpdateType,
+        updatetype: selectUpdateType,
         message: selectMessage,
         packagePath: "/path/to/package",
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        rendering();
+      })
+      .catch((err) => console.log("AddModal ::: " + err));
   };
 
   return (
