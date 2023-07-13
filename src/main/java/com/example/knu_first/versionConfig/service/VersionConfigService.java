@@ -79,17 +79,31 @@ public class VersionConfigService {
 
 
     public String makeDumData() {
-        for (int i = 0; i < 100; i++) {
-            VersionConfig versionConfig = VersionConfig.builder()
+        for (int i = 0; i < 50; i++) {
+            String version = String.format("%.1f", 1.0 + (i * 0.1));
+
+            VersionConfig versionConfig1 = VersionConfig.builder()
                     .os("ios")
-                    .version("2.0")
+                    .version(version)
                     .updatetype("true")
                     .message("This is an update message")
                     .packagePath("/path/to/package" + (i + 1))
+                    .minVersion("2.0")
                     .build();
 
-            versionConfigRepository.save(versionConfig);
+            VersionConfig versionConfig2 = VersionConfig.builder()
+                    .os("android")
+                    .version(version)
+                    .updatetype("true")
+                    .message("This is an update message")
+                    .packagePath("/path/to/package" + (i + 1))
+                    .minVersion("2.0")
+                    .build();
+
+            versionConfigRepository.save(versionConfig1);
+            versionConfigRepository.save(versionConfig2);
         }
+
 
         System.out.println("Dummy data loaded successfully.");
 
