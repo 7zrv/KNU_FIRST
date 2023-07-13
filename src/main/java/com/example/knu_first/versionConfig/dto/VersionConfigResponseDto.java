@@ -18,6 +18,9 @@ public class VersionConfigResponseDto {
     private final String packagePath;
     private final LocalDateTime regdate;
 
+    private final String forceUpdateMsg;
+
+
     public VersionConfigResponseDto(VersionConfig versionConfig){
         this.idx = versionConfig.getIdx();
         this.os = versionConfig.getOs();
@@ -27,5 +30,7 @@ public class VersionConfigResponseDto {
         this.packagePath = versionConfig.getPackagePath();
         this.regdate = versionConfig.getRegdate();
     }
+
+
 
 }

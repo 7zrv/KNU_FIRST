@@ -16,6 +16,7 @@ public class AddVersionRequestDto {
     private String updatetype;
     private String message;
     private String packagePath;
+    private String minVersion;
 
     public VersionConfig toEntity() { // 데이터 베이스 형식으로 변화를 일으킴, 데이터가 의도적으로 변화되는것을 방지
         return VersionConfig.builder()
@@ -24,6 +25,9 @@ public class AddVersionRequestDto {
                 .updatetype(updatetype)
                 .message(message)
                 .packagePath(packagePath)
+                .minVersion(minVersion)
                 .build();
     }
+
+
 }
