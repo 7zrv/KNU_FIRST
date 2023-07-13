@@ -18,7 +18,6 @@ public class VersionConfigResponseDto {
     private final String packagePath;
     private final LocalDateTime regdate;
 
-    private final String forceUpdateMsg;
 
 
     public VersionConfigResponseDto(VersionConfig versionConfig){
