@@ -10,14 +10,13 @@ const TestModal = (props) => {
   const selectList =
     versionList &&
     versionList.map((item) => (
-      <option value={`${item.idx}`} key={item.idx}>
+      <option value={item.idx - item.os} key={item.idx}>
         {item.idx}-{item.os}-{item.ver}
       </option>
     ));
 
   const selectChange = (e) => {
-    console.log(e);
-    setSelectValue(e.target.value);
+    setSelectValue(e.target.value.split("-")[1]);
   };
 
   const getVersion = () => {

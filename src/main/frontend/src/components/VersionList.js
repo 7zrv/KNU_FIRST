@@ -4,6 +4,7 @@ import "./VersionList.css";
 import Header from "./header";
 import DeleteModal from "./deleteModal";
 import UserTestModal from "./userTestModal";
+import ModifyModal from "./modifyModal";
 
 const VersionList = () => {
   const [list, setList] = useState([]);
@@ -13,6 +14,8 @@ const VersionList = () => {
   const [testResult, setTestResult] = useState("");
   const [pageList, setPageList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [deleteElement, setDeleteElement] = useState(false);
+  const [modifyModalOpen, setModifyModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -109,10 +112,32 @@ const VersionList = () => {
     setItemInfos(itemInfos);
     setDeleteModalOpen(true);
   };
+  const onClickModifyBtn = function (e) {
+    const trElement = e.currentTarget.parentNode.parentNode;
+    const tdElements = Array.from(trElement.querySelectorAll("td"));
+
+    const itemInfos = {
+      idx: tdElements[0].id,
+      os: tdElements[1].id,
+      ver: tdElements[2].id,
+      updatetype: tdElements[3].id,
+      message: tdElements[4].id,
+      packagePath: tdElements[5].id,
+      regdate: tdElements[6].id,
+    };
+
+    setItemInfos(itemInfos);
+    setModifyModalOpen(true);
+  };
 
   const closeModal = function () {
     if (deleteModalOpen) setDeleteModalOpen(false);
     if (userTestModalOpen) setUserTestModalOpen(false);
+    if (modifyModalOpen) setModifyModalOpen(false);
+  };
+  const onClick = (e) => {
+    const trElement = e.currentTarget.parentNode.parentNode;
+    const tdElements = Array.from(trElement.querySelectorAll("td"));
   };
 
   const tableList = pageList[currentPage - 1]?.map((item) => {
@@ -141,7 +166,9 @@ const VersionList = () => {
           <button className="testBtn" onClick={onClickUserTestBtn}>
             Test
           </button>
-          <button className="modBtn">수정</button>
+          <button className="modBtn" onClick={onClickModifyBtn}>
+            수정
+          </button>
           <button className="deleteBtn" onClick={onClickDeleteBtn}>
             삭제
           </button>
@@ -149,6 +176,7 @@ const VersionList = () => {
       </tr>
     );
   });
+
   return (
     <div>
       <Header versionList={list} rendering={rendering} />
@@ -168,6 +196,11 @@ const VersionList = () => {
             {tableList}
           </thead>
         </table>
+        {/* <ModifyModal
+          currentItem={currentItem.data}
+          items={list}
+          type={currentItem.type}
+        /> */}
       </section>
       <UserTestModal
         isModalOpen={userTestModalOpen}
@@ -175,6 +208,13 @@ const VersionList = () => {
         info={itemInfos}
         testResult={testResult}
       ></UserTestModal>
+      <ModifyModal
+        isModalOpen={modifyModalOpen}
+        toggleModal={closeModal}
+        info={itemInfos}
+        items={list}
+        setInfo={setItemInfos}
+      />
       <DeleteModal
         isModalOpen={deleteModalOpen}
         toggleModal={closeModal}
