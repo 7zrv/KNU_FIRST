@@ -1,11 +1,12 @@
 package com.example.knu_first.versionConfig.dto;
 
 import com.example.knu_first.versionConfig.entity.VersionConfig;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDateTime;
-
 
 @Getter
 public class VersionConfigResponseDto {

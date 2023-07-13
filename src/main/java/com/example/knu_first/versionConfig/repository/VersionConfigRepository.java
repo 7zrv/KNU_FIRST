@@ -16,7 +16,6 @@ import java.util.Optional;
 public interface VersionConfigRepository extends JpaRepository<VersionConfig, Long> {
     Optional<VersionConfig> findTopByOsOrderByVersionDesc(String os);
 
-    List<VersionConfig> findAllByVisibleTrue();
 
 
 }

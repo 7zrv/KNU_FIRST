@@ -29,7 +29,7 @@ public class VersionConfigService {
         return versionConfigRepository.save(requestDto.toEntity());
     }
     public List<VersionConfig> findAllVersionConfig(){
-        return versionConfigRepository.findAllByVisibleTrue();
+        return versionConfigRepository.findAll();
     }
 
     public VersionConfig findVersionConfigByOs(String os) throws Exception{
@@ -51,13 +51,11 @@ public class VersionConfigService {
 
 
     @Transactional
-    public VersionConfig deleteVersionConfig(Long idx) {
+    public void deleteVersionConfig(Long idx) {
         VersionConfig versionConfig = versionConfigRepository.findById(idx)
                 .orElseThrow(() -> new IllegalArgumentException("failed delete! : " + idx));
 
-        versionConfig.unVisibleVersionConfig();
-
-        return versionConfig;
+        versionConfigRepository.delete(versionConfig);
 
     }
 
@@ -66,31 +64,24 @@ public class VersionConfigService {
     }
 
 
-    public String makeDumData(){
-        VersionConfig versionConfig1 = VersionConfig.builder()
-                .os("ios")
-                .version("2.0")
-                .updatetype("true")
-                .message("This is an update message")
-                .packagePath("/path/to/package1")
-                .build();
+    public String makeDumData() {
+        for (int i = 0; i < 100; i++) {
+            VersionConfig versionConfig = VersionConfig.builder()
+                    .os("ios")
+                    .version("2.0")
+                    .updatetype("true")
+                    .message("This is an update message")
+                    .packagePath("/path/to/package" + (i + 1))
+                    .build();
 
-        VersionConfig versionConfig2 = VersionConfig.builder()
-                .os("Android")
-                .version("3.0")
-                .updatetype("true")
-                .message("This is another update message")
-                .packagePath("/path/to/package2")
-                .build();
-
-        // 더미 데이터 저장
-        versionConfigRepository.save(versionConfig1);
-        versionConfigRepository.save(versionConfig2);
+            versionConfigRepository.save(versionConfig);
+        }
 
         System.out.println("Dummy data loaded successfully.");
 
         return "success";
     }
+
 
 
 
