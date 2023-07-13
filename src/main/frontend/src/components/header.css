@@ -74,13 +74,13 @@
   font-weight: bold;
 }
 
-.addModal .buttons .no,
+.buttons .no,
 .cancle {
   background: red;
   color: white;
 }
 
-.addModal .buttons .ok,
+.buttons .ok,
 .delete {
   background: green;
   color: white;
@@ -92,10 +92,26 @@
   margin-bottom: 5px;
 }
 
+.testModal .submitForm {
+  width: 80%;
+  display: flex;
+  padding: 10px;
+}
+
+.testModal .submitForm select {
+  width: 85%;
+}
+.testModal .submitForm .submitBtn {
+  width: 15%;
+  background-color: blue;
+  color: white;
+}
+
 .userTestModal textarea,
 .testModal textarea {
   width: 80%;
   height: 50px;
+  margin-top: 10px;
 }
 
 .modifyModal > select,

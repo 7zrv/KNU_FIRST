@@ -42,6 +42,8 @@ public class VersionConfig {
     @Column(name = "min_version")
     private String minVersion;
 
+
+
     @Builder
     public VersionConfig(String os, String version, String updatetype, String message, String packagePath, String minVersion) {
         this.os = os;

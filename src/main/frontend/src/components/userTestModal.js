@@ -9,15 +9,18 @@ const UserTestModal = (props) => {
   };
 
   return (
-    <Modal
-      className={"userTestModal"}
-      isOpen={isModalOpen}
-      onRequestClose={toggleModal}
-    >
-      <div>Client Ver = {info.os}</div>
+    <Modal className={"userTestModal"} isOpen={isModalOpen}>
+      <div>Client Ver = {`\"${info.os}-${info.ver}\"`}</div>
       <div>Server Result</div>
       <textarea className="result" value={testResult} readOnly />
-      <button onClick={handleConfirm}>확인</button>
+      <section className="buttons">
+        <button className="cancle" onClick={handleConfirm}>
+          취소
+        </button>
+        <button className="ok" onClick={handleConfirm}>
+          확인
+        </button>
+      </section>
     </Modal>
   );
 };

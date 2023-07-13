@@ -4,45 +4,95 @@ import Modal from "react-modal";
 
 const AddModal = (props) => {
   const { isModalOpen, toggleModal, rendering } = props;
+
+  // 상태 변수 초기화
   const [selectOS, setSelectOS] = useState("ios");
-  const [selectVersion, setSelectVersion] = useState("1.0");
-  const [selectUpdateType, setSelectUpdateType] = useState("true");
+  const [selectVersion, setSelectVersion] = useState("");
+  const [selectUpdateType, setSelectUpdateType] = useState("false");
   const [selectMessage, setSelectMessage] = useState(
     "This is an update message."
   );
+  const [minVersion, setMinVersion] = useState("");
 
   const selectOsChange = (e) => {
     setSelectOS(e.target.value);
   };
+
   const selectVersionChange = (e) => {
     setSelectVersion(e.target.value);
   };
-  const selectUpdateTypeChange = (e) => {
-    setSelectUpdateType(e.target.value);
-  };
+
   const selectMessageChange = (e) => {
     setSelectMessage(e.target.value);
   };
 
-  const onClickNo = function () {
-    toggleModal();
+  const selectMinVersionChange = (e) => {
+    setMinVersion(e.target.value);
   };
 
-  const onClickOk = function () {
+  const validAdd = async function () {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/vercontrol/getConfig",
+        {
+          os: selectOS,
+        }
+      );
+
+      if (parseFloat(response.data.ver) < parseFloat(selectVersion)) {
+        console.log(
+          `Current Ver :: ${parseFloat(
+            response.data.ver
+          )} //// Add Ver :: ${parseFloat(selectVersion)}  =>> ${
+            parseFloat(response.data.ver) < parseFloat(selectVersion)
+          }`
+        );
+        return true;
+      } else {
+        console.log(
+          `Current Ver :: ${parseFloat(
+            response.data.ver
+          )} //// Add Ver :: ${parseFloat(selectVersion)}  =>> ${
+            parseFloat(response.data.ver) < parseFloat(selectVersion)
+          }`
+        );
+        return false;
+      }
+    } catch (err) {
+      console.log(err.request.status);
+      if (err.request.status === 500) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+
+  const onClickOk = async function () {
     toggleModal();
-    axios
-      .post("http://localhost:8080/api/vercontrol/add", {
-        os: selectOS,
-        ver: selectVersion,
-        updatetype: selectUpdateType,
-        message: selectMessage,
-        packagePath: "/path/to/package",
-      })
-      .then((res) => {
-        console.log(res);
-        rendering();
-      })
-      .catch((err) => console.log("AddModal ::: " + err));
+
+    const isValid = await validAdd(); // validAdd 함수의 결과를 기다립니다.
+
+    if (isValid) {
+      axios
+        .post("http://localhost:8080/api/vercontrol/add", {
+          os: selectOS,
+          ver: selectVersion,
+          updatetype: selectUpdateType,
+          message: selectMessage,
+          packagePath: "/path/to/package",
+          minVersion: minVersion,
+        })
+        .then((res) => {
+          console.log("AddModal Complete");
+          rendering();
+        })
+        .catch((err) => console.log("AddModal ::: " + err));
+    }
+  };
+
+  const onClickNo = function () {
+    toggleModal();
   };
 
   return (
@@ -62,17 +112,18 @@ const AddModal = (props) => {
         </select>
       </form>
       <form>
-        <input onChange={selectVersionChange} value={selectVersion}></input>
+        <input
+          onChange={selectMinVersionChange}
+          value={minVersion}
+          placeholder="Enter minimum version..."
+        ></input>
       </form>
       <form>
-        <select onChange={selectUpdateTypeChange} value={selectUpdateType}>
-          <option value={"true"} key={1}>
-            true
-          </option>
-          <option value={"false"} key={0}>
-            false
-          </option>
-        </select>
+        <input
+          onChange={selectVersionChange}
+          value={selectVersion}
+          placeholder="Enter update version..."
+        ></input>
       </form>
       <form>
         <select onChange={selectMessageChange} value={selectMessage}>
