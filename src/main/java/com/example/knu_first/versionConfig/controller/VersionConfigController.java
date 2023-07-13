@@ -1,13 +1,13 @@
 package com.example.knu_first.versionConfig.controller;
 
 
-import com.example.knu_first.versionConfig.dto.AddVersionRequestDto;
-import com.example.knu_first.versionConfig.dto.OsRequestDto;
-import com.example.knu_first.versionConfig.dto.VersionConfigResponseDto;
-import com.example.knu_first.versionConfig.dto.VersionConfigUpdateRequestDto;
+import com.example.knu_first.versionConfig.dto.*;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.service.VersionConfigService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +58,12 @@ public class VersionConfigController {
         versionConfigService.deleteVersionConfig(idx);
 
         return "Delete Complete";
+    }
+
+    @GetMapping("/api/vercontrol/page")
+    public Page<VersionConfig> pageVersionConfigs(@RequestBody PageVersionRequestDto pageVersionRequestDto) {
+        PageRequest pageable = PageRequest.of(pageVersionRequestDto.getPage(), 10, Sort.by("idx").descending());
+        return versionConfigService.pageVersions(pageable);
     }
 
     @GetMapping("/api/makeDummyData")

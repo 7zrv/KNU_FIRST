@@ -6,6 +6,9 @@ import com.example.knu_first.versionConfig.dto.VersionConfigUpdateRequestDto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.repository.VersionConfigRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -56,6 +59,10 @@ public class VersionConfigService {
 
         return versionConfig;
 
+    }
+
+    public Page<VersionConfig> pageVersions(Pageable pageable) {
+        return versionConfigRepository.findAll(pageable);
     }
 
 

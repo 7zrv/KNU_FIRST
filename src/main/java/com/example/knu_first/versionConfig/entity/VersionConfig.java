@@ -40,11 +40,6 @@ public class VersionConfig {
     private LocalDateTime regdate;
 
 
-
-    @Column(name = "visible")
-    private Boolean visible;
-
-
     @Builder
     public VersionConfig(String os, String version, String updatetype, String message, String packagePath) {
         this.os = os;
@@ -52,7 +47,6 @@ public class VersionConfig {
         this.updatetype = updatetype;
         this.message = message;
         this.packagePath = packagePath;
-        this.visible = true;
     }
 
     public void updateVersion(String os, String version, String updatetype, String message){
@@ -60,9 +54,5 @@ public class VersionConfig {
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
-    }
-
-    public void unVisibleVersionConfig(){
-        this.visible = false;
     }
 }

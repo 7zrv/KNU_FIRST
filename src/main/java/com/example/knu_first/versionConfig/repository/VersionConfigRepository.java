@@ -2,6 +2,7 @@ package com.example.knu_first.versionConfig.repository;
 
 
 import com.example.knu_first.versionConfig.entity.VersionConfig;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +18,5 @@ public interface VersionConfigRepository extends JpaRepository<VersionConfig, Lo
 
     List<VersionConfig> findAllByVisibleTrue();
 
-    Slice<VersionConfig> findSliceByIdx(Long idx, Pageable pageable);
 
-
-    Optional<VersionConfig> findByIdx(Long idx);
 }
