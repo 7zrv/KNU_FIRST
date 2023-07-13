@@ -6,4 +6,5 @@ import lombok.Getter;
 @Getter
 public class OsRequestDto {
     private String os;
+    private String ver;
 }

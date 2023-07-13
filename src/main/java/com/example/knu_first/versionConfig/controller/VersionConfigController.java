@@ -36,7 +36,7 @@ public class VersionConfigController {
         return ResponseEntity.ok().body(versionConfigs);
     }
 
-    @PostMapping("/api/vercontrol/getConfig")
+    @GetMapping("/api/vercontrol/getConfig")
     public ResponseEntity<VersionConfigResponseDto> findVersionConfigByOs(@RequestBody OsRequestDto osRequestDto) throws Exception {
         return ResponseEntity.ok().body(new VersionConfigResponseDto(versionConfigService.findVersionConfigByOs(osRequestDto.getOs())));
     }
@@ -60,7 +60,7 @@ public class VersionConfigController {
         return "Delete Complete";
     }
 
-    @GetMapping("/api/vercontrol/page")
+    @PostMapping("/api/vercontrol/page")
     public Page<VersionConfig> pageVersionConfigs(@RequestBody PageVersionRequestDto pageVersionRequestDto) {
         PageRequest pageable = PageRequest.of(pageVersionRequestDto.getPage(), 10, Sort.by("idx").descending());
         return versionConfigService.pageVersions(pageable);
