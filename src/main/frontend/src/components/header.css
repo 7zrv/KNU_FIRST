@@ -25,7 +25,9 @@
 }
 .testModal,
 .userTestModal,
-.addModal {
+.addModal,
+.deleteModal,
+.modifyModal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,19 +42,19 @@
   transform: translate(-50%, -50%);
 }
 
-.addModal form {
+.addModal > form {
   margin: 2px;
   width: 80%;
   height: 30px;
 }
 
-.addModal select {
+.addModal form > select {
   width: 100%;
   height: 100%;
   font-size: 20px;
 }
 
-.addModal input {
+.addModal form > input {
   width: 98%;
 
   font-size: 20px;
@@ -84,7 +86,30 @@
   color: white;
 }
 
-.userTestModal textarea {
+.userTestModal > span,
+.testModal > span {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.userTestModal textarea,
+.testModal textarea {
   width: 80%;
   height: 50px;
+}
+
+.modifyModal > select,
+.deleteModal form > select {
+  width: 50%;
+}
+
+.modifyModal > textarea,
+.deleteModal form > input {
+  width: 48%;
+}
+
+.deleteModal > form {
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }

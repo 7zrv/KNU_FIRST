@@ -23,6 +23,7 @@ const VersionList = () => {
       .then((res) => {
         setList(res.data);
         paginateList(res.data);
+        // console.log("VersionList :::::: " + res.data);
       })
       .catch((err) => {
         console.log("VersionList ::: " + err);
@@ -45,8 +46,8 @@ const VersionList = () => {
   };
 
   useEffect(() => {
-    console.log(list);
-    console.log(pageList);
+    // console.log(list);
+    // console.log(pageList);
   }, [list]);
 
   const rendering = () => {
@@ -177,9 +178,19 @@ const VersionList = () => {
     );
   });
 
+  const pageTest = () => {
+    axios
+      .post("https://localhost:8080/api/vercontrol/page", {
+        page: 1,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <Header versionList={list} rendering={rendering} />
+      <button onClick={pageTest}>Page Test</button>
       <section className="tableSection">
         <table className="table">
           <thead className="tableContainer">
@@ -214,6 +225,7 @@ const VersionList = () => {
         info={itemInfos}
         items={list}
         setInfo={setItemInfos}
+        rendering={rendering}
       />
       <DeleteModal
         isModalOpen={deleteModalOpen}
