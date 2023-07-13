@@ -45,6 +45,18 @@
 }
 
 .pageSection {
-  border: 2px solid black;
   text-align: center;
+}
+
+.pageSection > button {
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pageSection > span {
+  margin: 0px 10px 0px 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
