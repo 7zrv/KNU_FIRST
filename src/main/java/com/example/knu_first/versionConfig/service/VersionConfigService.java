@@ -2,6 +2,7 @@ package com.example.knu_first.versionConfig.service;
 
 
 import com.example.knu_first.versionConfig.dto.AddVersionRequestDto;
+import com.example.knu_first.versionConfig.dto.OsRequestDto;
 import com.example.knu_first.versionConfig.dto.VersionConfigUpdateRequestDto;
 import com.example.knu_first.versionConfig.entity.VersionConfig;
 import com.example.knu_first.versionConfig.repository.VersionConfigRepository;
@@ -32,10 +33,10 @@ public class VersionConfigService {
         return versionConfigRepository.findAll();
     }
 
-    public VersionConfig findVersionConfigByOs(String os) throws Exception{
-        return versionConfigRepository.findTopByOsOrderByVersionDesc(os).orElse(null);
+    public VersionConfig findVersionConfigByOs(OsRequestDto osRequestDto) throws Exception{
+        return versionConfigRepository.findTopByOsOrderByVersionDesc(osRequestDto.getOs()).orElse(null);
     }
-
+    public
     @Transactional
     public VersionConfig updateVersionConfig(Long idx, VersionConfigUpdateRequestDto requestDto){
         VersionConfig versionConfig = versionConfigRepository.findById(idx)

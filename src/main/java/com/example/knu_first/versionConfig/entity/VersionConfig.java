@@ -39,14 +39,17 @@ public class VersionConfig {
     @Column(name = "regdate")
     private LocalDateTime regdate;
 
+    @Column(name = "min_version")
+    private String minVersion;
 
     @Builder
-    public VersionConfig(String os, String version, String updatetype, String message, String packagePath) {
+    public VersionConfig(String os, String version, String updatetype, String message, String packagePath, String minVersion) {
         this.os = os;
         this.version = version;
         this.updatetype = updatetype;
         this.message = message;
         this.packagePath = packagePath;
+        this.minVersion = minVersion;
     }
 
     public void updateVersion(String os, String version, String updatetype, String message){
